@@ -2,7 +2,7 @@
   "name": "SQL-Larning-Mk3-backend_test",
   "version": "0.1.0",
   "description": "Testing for SQL-Larning-Mk3's backend",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/matsushinDB11/SQL-Larning-Mk3_bakend_test",
   "author": "Shintaro Matsumoto",
   "license": "MIT",
@@ -14,16 +14,17 @@
     "@types/node": "^16.10.3",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
+    "swagger-jsdoc": "^6.1.0",
     "ts-node": "^10.2.1",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.3"
   },
-  "main": "dist/index.js",
-   "scripts": {
-     "dev": "ts-node-dev --respawn src/index.ts",
-     "clean": "rimraf dist",
-     "tsc": "tsc",
-     "build": "npm-run-all clean tsc",
-     "start": "node ."
-   }
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "clean": "rimraf dist",
+    "tsc": "tsc",
+    "build": "npm-run-all clean tsc",
+    "start": "node .",
+    "make_doc": "swagger-jsdoc -d swaggerDefinition.cjs ./src/routes/**.ts"
+  }
 }

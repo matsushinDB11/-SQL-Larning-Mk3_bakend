@@ -1,0 +1,11 @@
+version: '3'
+services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: "SQL-Learning-MK3_test_swagger-ui"
+    ports:
+      - "8001:8080"
+    volumes:
+      - ./swagger.json:/swagger.json
+    environment:
+      SWAGGER_JSON: /swagger.json
