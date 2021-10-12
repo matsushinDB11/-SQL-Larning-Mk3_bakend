@@ -5,14 +5,23 @@
     "version": "1.0.0",
     "description": "Testing for SQL-Learning-MK3_backend"
   },
+  "tags": [
+    {
+      "name": "User",
+      "description": "ユーザー関連"
+    }
+  ],
   "apis": [
     "./dist/index.js"
   ],
   "swagger": "2.0",
   "paths": {
     "/users": {
-      "title": "ユーザー",
       "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "ユーザー取得",
         "description": "Get UserID & Name",
         "response": {
           "200": {
@@ -20,16 +29,20 @@
             "content": "application/json"
           }
         }
-      }
-    },
-    "post": {
-      "description": "Add User",
-      "response": {
-        "204": {
-          "description": "Success"
-        },
-        "400": {
-          "description": "Bad request"
+      },
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "ユーザー追加",
+        "description": "Add User",
+        "response": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
         }
       }
     }
@@ -37,6 +50,5 @@
   "definitions": {},
   "responses": {},
   "parameters": {},
-  "securityDefinitions": {},
-  "tags": []
+  "securityDefinitions": {}
 }
