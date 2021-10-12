@@ -10,6 +10,10 @@ module.exports = {
         {
             name: 'User',
             description: 'ユーザー関連'
+        },
+        {
+            name: 'employees',
+            description: '従業員情報'
         }
     ]
     ,

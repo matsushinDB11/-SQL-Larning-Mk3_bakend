@@ -9,6 +9,10 @@
     {
       "name": "User",
       "description": "ユーザー関連"
+    },
+    {
+      "name": "employees",
+      "description": "従業員情報"
     }
   ],
   "apis": [
@@ -16,6 +20,20 @@
   ],
   "swagger": "2.0",
   "paths": {
+    "/employees": {
+      "get": {
+        "tags": [
+          "employees"
+        ],
+        "summary": "従業員一覧",
+        "response": {
+          "200": {
+            "description": "Success",
+            "content": "application/json"
+          }
+        }
+      }
+    },
     "/users": {
       "get": {
         "tags": [
