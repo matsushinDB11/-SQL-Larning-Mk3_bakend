@@ -1,6 +1,8 @@
 import express from "express";
+import {employees} from "../controller/employees";
 
 const router = express.Router();
+const employeesController = new employees();
 
 /**
  * @swagger
@@ -13,8 +15,6 @@ const router = express.Router();
  *        description: Success
  *        content: application/json
  */
-router.get('/',((req: express.Request, res:express.Response) =>{
-    res.status(200).json({ userId: "U001", userName: "XXX xxx" });
-} ))
+router.get('/',employeesController.GetList)
 
 export default router;
