@@ -1,9 +1,13 @@
 import express from "express";
-import router from './routes/index';
+import {createRoutes} from './routes/index';
+import {NewService} from "./di/di";
 
 const app = express();
-app.use('/',router);
+const router = express.Router();
+// app.use('/',router);
 
+const service = NewService;
+createRoutes(router, service);
 /**
    * @swagger
    * /:

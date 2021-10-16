@@ -1,8 +1,13 @@
 import express from "express";
 import {employees} from "../controller/employees";
+import {Service} from "../di/di";
+
+function employeeRouter(router: express.Router,service:Service) {
+    const employeesController = new employees(service);
+
+}
 
 const router = express.Router();
-const employeesController = new employees();
 
 /**
  * @swagger

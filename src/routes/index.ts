@@ -1,11 +1,14 @@
 import express from 'express';
 import usersRouter from './users';
 import employeesRouter from "./employees";
+import {Service} from "../di/di";
 
-const router = express.Router();
+// const router = express.Router();
 
 // v1以下のルーティング
-router.use('/users', usersRouter);
-router.use('/employees', employeesRouter)
+export function createRoutes(router:express.Router, s: () => Service) {
+    router.use('/employees', employeesRouter);
+    router.use('/users', usersRouter);
+}
 
-export default router;
+// export default router;

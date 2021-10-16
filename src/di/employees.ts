@@ -1,6 +1,6 @@
 import {usecaseEmployee} from "../usecase/employees/endpoint";
 import {InfraEmployees} from "../infra/repository/employees/repsitory";
-import {employees as controllerEmployees} from "../controller/employees";
+import {abstractEmployeesController, employees} from "../controller/employees";
 
 // export function CreateEmployeesController() {
 //
@@ -10,14 +10,15 @@ import {employees as controllerEmployees} from "../controller/employees";
 // }
 
 export class CreateEmployeesController {
-    private employeeRepository!: InfraEmployees;
+    // private employeeRepository!: InfraEmployees;
     // constructor(db) {
     // }
-    public createController():controllerEmployees {
+    public createController():abstractEmployeesController {
         const i = new usecaseEmployee(
-            this.employeeRepository
+            // this.employeeRepository
+            new InfraEmployees(),
         )
-        return new controllerEmployees(i);
+        return new employees(i);
     }
 }
 

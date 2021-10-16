@@ -1,17 +1,24 @@
-import {employees as controllerEmployees} from "../controller/employees";
+import {abstractEmployeesController, employees as controllerEmployees} from "../controller/employees";
 import {CreateEmployeesController} from "./employees";
+import exp from "constants";
 
-type Service = {
-    employees: controllerEmployees
+export type Service = {
+    employees: abstractEmployeesController,
 }
 
-export class NewService {
-    constructor() {
-        NewEmployeesController:
-    }
-    CreateService():Service {
-        return {
-            employees: CreateEmployeesController.
-        }
+export function NewService():Service {
+    return{
+        employees: new CreateEmployeesController().createController(),
     }
 }
+
+// export class NewService {
+//     constructor() {
+//         new CreateEmployeesController
+//     }
+//     CreateService():Service {
+//         return {
+//             employees: new controllerEmployees,
+//         };
+//     }
+// }
