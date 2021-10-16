@@ -1,8 +1,14 @@
-import {Service} from "../di/di";
 import express from "express";
+import {Interactor} from "../usecase/employees/endpoint";
 
 export class employees {
-    GetList(req: express.Request, res: express.Response){
-        res.json(({ userId: "U001", userName: "XXX xxx" }));
+    private interactor:Interactor;
+    constructor(interactor: Interactor) {
+        this.interactor = interactor;
+    }
+    GetList(res: express.Response){
+        // res.json(({ userId: "U001", userName: "XXX xxx" }));
+        const data = this.interactor.GetList();
+        res.json(data);
     }
 }
