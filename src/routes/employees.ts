@@ -2,13 +2,7 @@ import express from "express";
 import {employees} from "../controller/employees";
 import {Service} from "../di/di";
 
-function employeeRouter(router: express.Router,service:Service) {
-    const employeesController = new employees(service);
-
-}
-
-const router = express.Router();
-
+export default function employeeRouter(router: express.Router,s:Service):express.Router {
 /**
  * @swagger
  * /employees:
@@ -20,6 +14,12 @@ const router = express.Router();
  *        description: Success
  *        content: application/json
  */
-router.get('/',employeesController.GetList)
+    router.get('/',s.employees.GetList)
+    return router
+}
 
-export default router;
+// const router = express.Router();
+
+// router.get('/',employeesController.GetList)
+
+// export default router;
