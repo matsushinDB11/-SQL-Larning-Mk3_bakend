@@ -3,9 +3,8 @@ import createRoutes from './routes/index';
 import {NewService} from "./di/di";
 
 const app = express();
-const router = express.Router();
-
 const service = new NewService();
+
 app.use('/',createRoutes(app, service));
 /**
    * @swagger
