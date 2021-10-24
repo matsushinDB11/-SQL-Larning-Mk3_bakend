@@ -6,6 +6,6 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = "mysql://TestUser01:AuthTestUser01@localhost:33306/Test01"
 }
