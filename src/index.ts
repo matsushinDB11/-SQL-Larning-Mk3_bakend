@@ -1,12 +1,12 @@
 import express from "express";
 import createRoutes from './routes/index';
-import {NewService} from "./di/di";
+import {Service} from "./di/di";
 
 const app = express();
 const router = express.Router();
 
-const service = NewService();
-app.use('/',createRoutes(router, service));
+const service = new Service();
+app.use('/',createRoutes(app, service));
 /**
    * @swagger
    * /:
@@ -16,7 +16,7 @@ app.use('/',createRoutes(router, service));
    *       200:
    *         description: swagger-jsdoc test
    */
- app.get('/', (req, res) => {
+ app.get('/', (req:express.Request, res:express.Response) => {
   res.send('This is SQL-Learning-MK3 test')
 })
 

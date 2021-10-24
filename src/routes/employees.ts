@@ -1,8 +1,8 @@
 import express from "express";
-import {employees} from "../controller/employees";
 import {Service} from "../di/di";
 
-export default function employeeRouter(router: express.Router,s:Service):express.Router {
+export default function employeeRouter(s:Service):express.Router {
+    const router = express.Router()
 /**
  * @swagger
  * /employees:
@@ -14,12 +14,8 @@ export default function employeeRouter(router: express.Router,s:Service):express
  *        description: Success
  *        content: application/json
  */
-    router.get('/',s.employees.GetList)
+    router.get('/',(req:express.Request, res:express.Response)=>{
+        s.employees.GetList(res)
+    })
     return router
 }
-
-// const router = express.Router();
-
-// router.get('/',employeesController.GetList)
-
-// export default router;

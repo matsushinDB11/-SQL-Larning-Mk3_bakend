@@ -1,10 +1,8 @@
 import {employee, Repository} from "../../../domain/employees/repository";
 
 export class InfraEmployees implements Repository {
-    // constructor() {
-    //     repsitory
-    // }
     GetList(): employee[] {
+        // テスト用サンプルリターン
         const sampleReturn: employee = {
             ID:1,
             name:"シマゴロー",
@@ -17,5 +15,4 @@ export class InfraEmployees implements Repository {
         }
         return [sampleReturn,];
     }
-
 }
