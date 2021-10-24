@@ -1,11 +1,22 @@
 version: '3'
 services:
+  mysql:
+    image: mysql:8.0.26
+    environment:
+      MYSQL_ROOT_PASSWORD: "mysqlrootpass"
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+      - ./db/costom:/etc/mysql/conf.d
+    ports:
+      - "33306:3306"
   swagger-ui:
     image: swaggerapi/swagger-ui
-    container_name: "SQL-Learning-MK3_test_swagger-ui"
     ports:
       - "8001:8080"
     volumes:
+      - mysql_data:/var/lib/mysql
       - ./swagger.json:/swagger.json
     environment:
       SWAGGER_JSON: /swagger.json
+volumes:
+  mysql_data:
