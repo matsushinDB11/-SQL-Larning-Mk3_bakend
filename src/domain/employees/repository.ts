@@ -1,7 +1,7 @@
 import {PrismaInterface as Tx} from "../prisma";
 
 export interface Repository {
-    GetList(tx: Tx): employee[];
+    GetList(prisma: Tx): employee[];
 }
 
 export type employee = {

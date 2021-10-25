@@ -1,8 +1,8 @@
 import {employee, Repository} from "../../../domain/employees/repository";
-import {PrismaInterface as Tx} from "../../../domain/prisma";
+import {PrismaInterface as Prisma} from "../../../domain/prisma";
 
 export class InfraEmployees implements Repository {
-    GetList(tx: Tx): employee[] {
+    GetList(prisma: Prisma): employee[] {
         // テスト用サンプルリターン
         const sampleReturn: employee = {
             ID:1,
