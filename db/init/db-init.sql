@@ -15,7 +15,38 @@ USE Test01;
 #                              BIRTHDAY varchar(50),
 #                              BLOODTYPE varchar(50)
 # );
-#
+
+# INSERT INTO User
+# (name,  email)
+# VALUES('シマゴロー','simagoro@nekoyasudo');
+# INSERT INTO User
+# (name,  email)
+# VALUES('ゴッチン','gochin@nekoyasudo');
+# INSERT INTO User
+# (name,  email)
+# VALUES('マキ子','maki@nekoyasudo');
+# INSERT INTO User
+# (name,  email)
+# VALUES('マル','maru@nekoyasudo');
+# INSERT INTO User
+# (name,  email)
+# VALUES('ミチロー','michiro@nekoyasudo');
+# INSERT INTO User
+# (name,  email)
+# VALUES('チー','coo@nekoyasudo');
+# INSERT INTO User
+# (name,  email)
+# VALUES('サラ', 'sara@nekoyasudo');
+# INSERT INTO User
+# (name,  email)
+# VALUES('みなみ', 'minami@nekoyasudo');
+# INSERT INTO User
+# (name,  email)
+# VALUES('プリン', 'prin@nekoyasudo');
+# INSERT INTO User
+# (name,  email)
+# VALUES('ぴー子','pko@nekoyasudo');
+
 # INSERT INTO employees
 # (EMPLOYEENAME, HEIGHT, EMAIL, WEIGHT, HIREFISCALYEAR, BIRTHDAY, BLOODTYPE)
 # VALUES('シマゴロー', 168, 'simagoro@nekoyasudo', 72, 1987, '1956/10/1', 'A');
