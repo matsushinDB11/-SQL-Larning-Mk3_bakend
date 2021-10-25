@@ -27,7 +27,9 @@
     "tsc": "tsc",
     "build": "npm-run-all clean tsc",
     "start": "node .",
-    "make_doc": "swagger-jsdoc -d swaggerDefinition.cjs ./src/routes/**.ts",
-    "batch": "ts-node src/batch/index.ts"
+    "make_doc": "swagger-jsdoc -d swaggerDefinition.cjs ./src/routes/**.ts"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }
