@@ -1,5 +1,5 @@
 import {convertListOutput, ListOutput,} from "./output";
-import {PrismaInterface as Prisma} from "../../domain/prisma";
+import {PrismaClient} from "@prisma/client";
 import {Repository} from "../../domain/users";
 import {getList} from "./logic";
 
@@ -9,8 +9,8 @@ export type Interactor = {
 
 export class usersUsecase implements Interactor {
     private readonly repository: Repository;
-    private readonly prisma: Prisma
-    constructor(repository: Repository, prisma: Prisma) {
+    private readonly prisma: PrismaClient
+    constructor(repository: Repository, prisma: PrismaClient) {
         this.repository = repository;
         this.prisma = prisma
     }
