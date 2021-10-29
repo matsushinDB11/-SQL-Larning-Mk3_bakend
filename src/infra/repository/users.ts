@@ -1,10 +1,8 @@
-import {user ,Repository} from "../../domain/users";
-import {PrismaInterface as Prisma} from "../../domain/prisma";
-import {PrismaClient} from "@prisma/client";
+import {Repository} from "../../domain/users";
+import {PrismaClient, User} from "@prisma/client";
 
 export class usersInfra implements Repository {
-    GetList(prisma: PrismaClient): user[] {
-        const res = prisma.user.findMany()
-        return [];
-    }
+    GetList = async (prisma: PrismaClient): Promise<User[]> => {
+        return await prisma.user.findMany()
+    };
 }
