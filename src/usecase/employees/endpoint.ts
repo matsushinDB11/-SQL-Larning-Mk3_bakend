@@ -1,7 +1,7 @@
 import {Repository} from "../../domain/employees/repository";
 import {getList} from "./logic";
 import {convertListOutput, ListOutput} from "./output";
-import {PrismaInterface as Tx} from "../../domain/prisma";
+import {PrismaClient} from "@prisma/client";
 
 export type Interactor = {
     GetList():ListOutput
@@ -9,13 +9,13 @@ export type Interactor = {
 
 export class usecaseEmployee implements Interactor{
    private readonly repository: Repository;
-   private readonly tx: Tx
-   constructor(repository: Repository, tx: Tx){
+   private readonly prisma: PrismaClient
+   constructor(repository: Repository, prisma: PrismaClient){
         this.repository = repository;
-        this.tx = tx;
+        this.prisma = prisma;
    }
     GetList(): ListOutput {
-        const data = getList(this.tx ,this.repository);
+        const data = getList(this.prisma ,this.repository);
         return convertListOutput(data);
     }
 }
