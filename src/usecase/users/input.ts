@@ -1,0 +1,3 @@
+type GetInput = {
+    userID: number
+}
