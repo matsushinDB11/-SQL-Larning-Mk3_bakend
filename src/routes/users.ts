@@ -8,8 +8,8 @@ export default function usersRouter(s:Service):express.Router {
    *  /users:
    *    get:
    *      tags: [User]
-   *      summary: ユーザー取得
-   *      description: Get UserID & Name
+   *      summary: ユーザー一覧取得
+   *      description: Get users list.
    *      response:
    *       200:
    *        description: Success
