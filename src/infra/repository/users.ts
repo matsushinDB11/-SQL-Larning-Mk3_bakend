@@ -6,11 +6,17 @@ export class usersInfra implements Repository {
         return prisma.user.findMany()
     };
 
-    Get = async (prisma: PrismaClient, userID: number): Promise<User | null> => {
-        return await prisma.user.findUnique({
+    Get = async (prisma: PrismaClient, userID: number): Promise<Result<User, notfoundError>> => {
+        const data = await prisma.user.findUnique({
             where: {
                 id: userID,
             },
         })
+        if (data != null) {
+            return new Success(data);
+        }
+        else {
+            return new Failure(new notfoundError);
+        }
     }
 }
