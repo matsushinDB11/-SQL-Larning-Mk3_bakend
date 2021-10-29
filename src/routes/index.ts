@@ -7,6 +7,6 @@ import {Service} from "../di/di";
 export default function createRoutes(app:express.Express, s:Service):express.Router {
     const router = express.Router();
     router.use('/employees', employeesRouter(s));
-    router.use('/users', usersRouter);
+    router.use('/users', usersRouter(s));
     return router
 }
