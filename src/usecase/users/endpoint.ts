@@ -2,6 +2,7 @@ import {convertGetOutput, convertListOutput, ListOutput, user,} from "./output";
 import {PrismaClient} from "@prisma/client";
 import {Repository} from "../../domain/users";
 import {getList, get} from "./logic";
+import {GetInput} from "./input";
 
 export type Interactor = {
     GetList(): Promise<ListOutput>;

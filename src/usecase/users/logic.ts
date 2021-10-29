@@ -1,5 +1,6 @@
 import {Repository} from "../../domain/users";
 import {PrismaClient, User} from "@prisma/client";
+import {GetInput} from "./input";
 
 export async function getList(prisma: PrismaClient, userRepo: Repository):Promise<User[]> {
     return await userRepo.GetList(prisma);

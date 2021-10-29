@@ -1,3 +1,3 @@
-type GetInput = {
+export type GetInput = {
     userID: number
 }
