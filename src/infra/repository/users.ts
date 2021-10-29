@@ -6,7 +6,7 @@ export class usersInfra implements Repository {
         return prisma.user.findMany()
     };
 
-    Get = async (prisma: PrismaClient, userID: number): Promise<Result<User, notfoundError>> => {
+    Get = async (prisma: PrismaClient, userID: number): Promise<Result<User, resourceNotFoundError>> => {
         const data = await prisma.user.findUnique({
             where: {
                 id: userID,
@@ -16,7 +16,7 @@ export class usersInfra implements Repository {
             return new Success(data);
         }
         else {
-            return new Failure(new notfoundError);
+            return new Failure(new resourceNotFoundError("memoID: " + String(userID)));
         }
     }
 }
