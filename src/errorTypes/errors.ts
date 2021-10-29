@@ -1,4 +1,4 @@
-class resourceNotFoundError extends Error{
+export class resourceNotFoundError extends Error{
     message: string;
     name: string;
     constructor(resource: string) {

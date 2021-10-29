@@ -3,6 +3,7 @@ import {PrismaClient} from "@prisma/client";
 import {Repository} from "../../domain/users";
 import {getList, get} from "./logic";
 import {GetInput} from "./input";
+import {Failure, Result, Success} from "../../errorTypes/resultType";
 
 export type Interactor = {
     GetList(): Promise<ListOutput>;

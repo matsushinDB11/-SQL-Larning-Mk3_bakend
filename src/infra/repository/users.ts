@@ -1,5 +1,7 @@
 import {Repository} from "../../domain/users";
 import {PrismaClient, User} from "@prisma/client";
+import {Failure, Result, Success} from "../../errorTypes/resultType";
+import {resourceNotFoundError} from "../../errorTypes/errors";
 
 export class usersInfra implements Repository {
     GetList = async (prisma: PrismaClient): Promise<User[]> => {
