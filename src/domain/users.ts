@@ -1,8 +1,8 @@
-import {PrismaInterface as Prisma} from "./prisma";
+import {PrismaClient} from "@prisma/client";
 import {User} from "@prisma/client"
 
 export interface Repository {
-    GetList(prisma: Prisma):Promise<User[]>;
+    GetList(prisma: PrismaClient):Promise<User[]>;
 }
 
 // export type user = {
