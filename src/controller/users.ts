@@ -6,8 +6,8 @@ export class usersController {
     constructor(interactor: Interactor) {
         this.interactor = interactor;
     }
-    GetList(res: express.Response){
-        const data = this.interactor.GetList();
+    async GetList(res: express.Response) {
+        const data = await this.interactor.GetList();
         res.json(data);
     }
 }

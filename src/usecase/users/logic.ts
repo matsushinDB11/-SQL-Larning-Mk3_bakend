@@ -1,6 +1,6 @@
-import {user as userDomain, Repository} from "../../domain/users";
-import {PrismaClient} from "@prisma/client";
+import {Repository} from "../../domain/users";
+import {PrismaClient, User} from "@prisma/client";
 
-export function getList(prisma: PrismaClient, userRepo: Repository):userDomain[] {
-    return userRepo.GetList(prisma);
+export async function getList(prisma: PrismaClient, userRepo: Repository):Promise<User[]> {
+    return await userRepo.GetList(prisma);
 }

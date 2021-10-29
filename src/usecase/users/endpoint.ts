@@ -4,7 +4,7 @@ import {Repository} from "../../domain/users";
 import {getList} from "./logic";
 
 export type Interactor = {
-    GetList(): ListOutput
+    GetList(): Promise<ListOutput>
 }
 
 export class usersUsecase implements Interactor {
@@ -14,8 +14,8 @@ export class usersUsecase implements Interactor {
         this.repository = repository;
         this.prisma = prisma
     }
-    GetList(): ListOutput {
+    async GetList(): Promise<ListOutput> {
         const data = getList(this.prisma, this.repository);
-        return convertListOutput(data);
+        return convertListOutput(await data);
     }
 }
