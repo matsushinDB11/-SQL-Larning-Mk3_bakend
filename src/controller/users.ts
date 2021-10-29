@@ -1,13 +1,13 @@
 import express from "express";
 import {Interactor} from "../usecase/users/endpoint"
+import {ListOutput} from "../usecase/users/output";
 
 export class usersController {
     protected interactor: Interactor;
     constructor(interactor: Interactor) {
         this.interactor = interactor;
     }
-    async GetList(res: express.Response) {
-        const data = await this.interactor.GetList();
-        res.json(data);
+    async GetList():Promise<ListOutput> {
+        return this.interactor.GetList();
     }
 }
