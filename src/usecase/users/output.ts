@@ -1,6 +1,6 @@
 import {User} from "@prisma/client"
 
-type user = {
+export type user = {
     ID: number
     email: string
     name: string | null

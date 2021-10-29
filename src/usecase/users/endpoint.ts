@@ -1,10 +1,11 @@
-import {convertListOutput, ListOutput,} from "./output";
+import {convertGetOutput, convertListOutput, ListOutput, user,} from "./output";
 import {PrismaClient} from "@prisma/client";
 import {Repository} from "../../domain/users";
-import {getList} from "./logic";
+import {getList, get} from "./logic";
 
 export type Interactor = {
-    GetList(): Promise<ListOutput>
+    GetList(): Promise<ListOutput>;
+    Get(input: GetInput): Promise<Result<user, Error>>;
 }
 
 export class usersUsecase implements Interactor {
@@ -17,5 +18,13 @@ export class usersUsecase implements Interactor {
     async GetList(): Promise<ListOutput> {
         const data = getList(this.prisma, this.repository);
         return convertListOutput(await data);
+    }
+    async Get(input: GetInput): Promise<Result<user, Error>> {
+        const data = await get(this.prisma, this.repository, input)
+        if (data.isFailure()) {
+            return new Failure(data.value);
+        } else {
+            return new Success(convertGetOutput(data.value));
+        }
     }
 }
