@@ -6,7 +6,7 @@ export class usersInfra implements Repository {
         return prisma.user.findMany()
     };
 
-    Get = async (prisma: PrismaClient, userID: number): Promise<Promise<User> | null> => {
+    Get = async (prisma: PrismaClient, userID: number): Promise<User | null> => {
         return await prisma.user.findUnique({
             where: {
                 id: userID,
