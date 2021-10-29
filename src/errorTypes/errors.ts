@@ -1,10 +1,12 @@
-class resourceNotFoundError extends Error {
-    private readonly resource: string;
+class resourceNotFoundError extends Error{
+    message: string;
+    name: string;
     constructor(resource: string) {
         super();
-        this.resource = resource;
+        this.message = resource;
+        this.name = "resourceNotFoundError"
     }
     CatError = () => {
-        return this.resource + "not found"
+        return this.message + "not found"
     }
 }
