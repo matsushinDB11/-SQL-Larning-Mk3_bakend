@@ -1,4 +1,3 @@
-import express from "express";
 import {Interactor} from "../usecase/users/endpoint"
 import {ListOutput} from "../usecase/users/output";
 
