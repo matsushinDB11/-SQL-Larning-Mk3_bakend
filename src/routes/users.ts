@@ -20,6 +20,11 @@ export default function usersRouter(s:Service):express.Router {
     // res.status(200).json({ userId: "U001", userName: "Yamada Taro" });
     s.users.GetList().then(r => res.json(r));
   });
+
+  router.get('/:id',(req: express.Request, res: express.Response)=> {
+    s.users.Get(req, res);
+  })
+
   /**
    * @swagger
    * /users:
