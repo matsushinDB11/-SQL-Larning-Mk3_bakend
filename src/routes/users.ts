@@ -21,6 +21,7 @@ export default function usersRouter(s:Service):express.Router {
     s.users.GetList().then(r => res.json(r));
   });
 
+  // TODO Getのドキュメント書く
   router.get('/:id',(req: express.Request, res: express.Response)=> {
     s.users.Get(req, res);
   })
