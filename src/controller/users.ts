@@ -3,7 +3,6 @@ import {ListOutput} from "../usecase/users/output";
 import express from "express";
 import {GetInput} from "../usecase/users/input";
 
-
 export class usersController {
     protected interactor: Interactor;
     constructor(interactor: Interactor) {
