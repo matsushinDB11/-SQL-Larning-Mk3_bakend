@@ -11,5 +11,5 @@ export interface Repository {
 export type user = {
     ID: number
     email: string
-    name: string
+    name: string | null
 }

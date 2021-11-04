@@ -9,16 +9,22 @@ export class usersInfra implements Repository {
     };
 
     Get = async (prisma: PrismaClient, userID: number): Promise<Result<userDomain, resourceNotFoundError>> => {
-        const data = await prisma.user.findUnique({
+        const rowData = await prisma.user.findUnique({
             where: {
                 id: userID,
             },
         })
-        if (data != null) {
-            return new Success(data);
+        if (rowData == null) {
+            return new Failure(new resourceNotFoundError("memoID: " + String(userID)));
         }
         else {
-            return new Failure(new resourceNotFoundError("memoID: " + String(userID)));
+            // return new Success(rowData);
+            const resData:userDomain = {
+                ID: rowData.id,
+                email: rowData.email,
+                name: rowData.name
+            }
+            return new Success(resData);
         }
     }
 }
