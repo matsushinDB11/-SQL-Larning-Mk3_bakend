@@ -63,6 +63,25 @@
           }
         }
       }
+    },
+    "/user/:id": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "ユーザー詳細取得",
+        "description": "Get user info",
+        "response": {
+          "200": {
+            "description": "Success",
+            "content": "application/json"
+          },
+          "400": {
+            "description": "Resource not found error",
+            "content": "application/json"
+          }
+        }
+      }
     }
   },
   "definitions": {},
