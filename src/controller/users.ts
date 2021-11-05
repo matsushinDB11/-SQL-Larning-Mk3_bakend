@@ -1,5 +1,4 @@
 import {Interactor} from "../usecase/users/endpoint"
-import {ListOutput} from "../usecase/users/output";
 import express from "express";
 import {GetInput} from "../usecase/users/input";
 
@@ -8,9 +7,9 @@ export class usersController {
     constructor(interactor: Interactor) {
         this.interactor = interactor;
     }
-    // TODO コントローラーで express.res.json するように変更
-    async GetList():Promise<ListOutput> {
-        return this.interactor.GetList();
+    async GetList(req: express.Request, res: express.Response) {
+        const data = await this.interactor.GetList();
+        res.status(200).json(data);
     }
     async Get(req: express.Request, res: express.Response) {
         const stringParam = req.params.id;

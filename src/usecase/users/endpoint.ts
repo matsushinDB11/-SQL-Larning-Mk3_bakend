@@ -18,8 +18,8 @@ export class usersUsecase implements Interactor {
         this.prisma = prisma
     }
     async GetList(): Promise<ListOutput> {
-        const data = getList(this.prisma, this.repository);
-        return convertListOutput(await data);
+        const data = await getList(this.prisma, this.repository);
+        return convertListOutput(data);
     }
     async Get(input: GetInput): Promise<Result<user, Error>> {
         const data = await get(this.prisma, this.repository, input)

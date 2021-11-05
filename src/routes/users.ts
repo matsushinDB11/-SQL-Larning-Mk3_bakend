@@ -18,7 +18,7 @@ export default function usersRouter(s:Service):express.Router {
   // GETリクエスト
   router.get('/', (req: express.Request, res: express.Response) => {
     // res.status(200).json({ userId: "U001", userName: "Yamada Taro" });
-    s.users.GetList().then(r => res.json(r));
+    s.users.GetList(req, res);
   });
 
   /**
@@ -53,7 +53,6 @@ export default function usersRouter(s:Service):express.Router {
    *       400:
    *        description: Bad request
    */
-
   // POSTリクエスト
   router.post('/', (req: express.Request, res: express.Response) => {
     res.status(200).json({ message: "登録しました" });
