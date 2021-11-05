@@ -21,7 +21,21 @@ export default function usersRouter(s:Service):express.Router {
     s.users.GetList().then(r => res.json(r));
   });
 
-  // TODO Getのドキュメント書く
+  /**
+   * @swagger
+   * /user/:id:
+   *  get:
+   *    tags: [User]
+   *    summary: ユーザー詳細取得
+   *    description: Get user info
+   *    response:
+   *      200:
+   *        description: Success
+   *        content: application/json
+   *      400:
+   *        description: Resource not found error
+   *        content: application/json
+   */
   router.get('/:id',(req: express.Request, res: express.Response)=> {
     s.users.Get(req, res);
   })
@@ -46,5 +60,3 @@ export default function usersRouter(s:Service):express.Router {
   });
   return router;
 }
-
-
