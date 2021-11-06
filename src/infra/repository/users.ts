@@ -2,10 +2,11 @@ import {Repository, user as userDomain} from "../../domain/users";
 import {PrismaClient} from "@prisma/client";
 import {Failure, Result, Success} from "../../errorTypes/resultType";
 import {resourceNotFoundError} from "../../errorTypes/errors";
+import {DBClient} from "../../domain/DBClient";
 
 export class usersInfra implements Repository {
-    GetList = async (prisma: PrismaClient): Promise<userDomain[]> => {
-        const rowData = await prisma.user.findMany()
+    GetList = async (dbClient: DBClient): Promise<userDomain[]> => {
+        const rowData = await dbClient.ConnectDB().user.findMany()
         let resData: userDomain[] = [];
         for (let Key in rowData) {
             resData.push({
