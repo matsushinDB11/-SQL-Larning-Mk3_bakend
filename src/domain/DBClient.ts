@@ -1,9 +1,9 @@
 import {PrismaClient} from "@prisma/client";
 
-export interface DBConnection {
+export interface DBClient {
     DBClient():PrismaClient;
     CreateTransaction():undefined;
-    CloseTransaction():DBConnection;
+    CloseTransaction():DBClient;
     Rollback(): undefined;
-    CommitTransaction(): DBConnection;
+    CommitTransaction(): DBClient;
 }

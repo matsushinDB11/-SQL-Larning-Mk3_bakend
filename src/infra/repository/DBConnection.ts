@@ -1,11 +1,16 @@
-import {DBConnection} from "../../domain/DBConnection";
+import {DBClient} from "../../domain/DBClient";
+import {PrismaClient} from "@prisma/client";
 
-export class Prisma implements DBConnection {
-    CloseTransaction(): DBConnection {
+export class Prisma implements DBClient {
+    private Prisma: PrismaClient;
+    private isTransactionValid: boolean;
+    constructor() {
+    }
+    CloseTransaction(): DBClient {
         return undefined;
     }
 
-    CommitTransaction(): DBConnection {
+    CommitTransaction(): DBClient {
         return undefined;
     }
 
