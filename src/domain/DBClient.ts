@@ -1,9 +1,9 @@
 import {PrismaClient} from "@prisma/client";
 
 export interface DBClient {
-    DBClient():PrismaClient;
+    ConnectDB():PrismaClient | undefined;
     CreateTransaction():undefined;
-    CloseTransaction():DBClient;
     Rollback(): undefined;
-    CommitTransaction(): DBClient;
+    CloseTransaction():DBClient | undefined; // Prismaでは自動
+    CommitTransaction(): DBClient | undefined; // Prismaでは自動
 }
