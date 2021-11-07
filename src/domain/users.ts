@@ -5,7 +5,7 @@ import {resourceNotFoundError} from "../errorTypes/errors";
 
 export interface Repository {
     GetList(dbClient: DBClient):Promise<user[]>;
-    Get(prisma: PrismaClient, userID: number):Promise<Result<user, resourceNotFoundError>>;
+    Get(dbClient: DBClient, userID: number):Promise<Result<user, resourceNotFoundError>>;
 }
 
 export type user = {

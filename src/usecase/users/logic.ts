@@ -1,15 +1,15 @@
 import {Repository, user as userDomain} from "../../domain/users";
-import {PrismaClient, User} from "@prisma/client";
+import {DBClient} from "../../domain/DBClient";
 import {GetInput} from "./input";
 import {Failure, Result, Success} from "../../errorTypes/resultType";
 
 
-export async function getList(prisma: PrismaClient, userRepo: Repository):Promise<userDomain[]> {
-    return await userRepo.GetList(prisma);
+export async function getList(dbClient: DBClient, userRepo: Repository):Promise<userDomain[]> {
+    return await userRepo.GetList(dbClient);
 }
 
-export async function get(prisma: PrismaClient, userRepo: Repository, input: GetInput):Promise<Result<userDomain, Error>> {
-    const data = await userRepo.Get(prisma, input.userID);
+export async function get(dbClient: DBClient, userRepo: Repository, input: GetInput):Promise<Result<userDomain, Error>> {
+    const data = await userRepo.Get(dbClient, input.userID);
     if (data.isFailure()) {
         return new Failure(data.value);
     } else {
