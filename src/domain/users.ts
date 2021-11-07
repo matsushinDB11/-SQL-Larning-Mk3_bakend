@@ -5,7 +5,7 @@ import {resourceNotFoundError} from "../errorTypes/errors";
 
 export interface Repository {
     GetList(dbClient: DBClient):Promise<user[]>;
-    Get(dbClient: DBClient, userID: number):Promise<Result<user, resourceNotFoundError>>;
+    Get(dbClient: DBClient, userID: number):Promise<Result<user, Error>>;
 }
 
 export type user = {

@@ -18,7 +18,7 @@ export class usersInfra implements Repository {
         return resData;
     };
 
-    Get = async (dbClient: DBClient, userID: number): Promise<Result<userDomain, resourceNotFoundError>> => {
+    Get = async (dbClient: DBClient, userID: number): Promise<Result<userDomain, Error>> => {
         const rowData = await dbClient.ConnectDB().user.findUnique({
             where: {
                 id: userID,
