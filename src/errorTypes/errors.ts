@@ -6,7 +6,14 @@ export class resourceNotFoundError extends Error{
         this.message = resource;
         this.name = "resourceNotFoundError"
     }
-    CatError = () => {
-        return this.message + "not found"
+}
+
+export class DBInternalError extends Error {
+    message: string;
+    name: string;
+    constructor(resource: string) {
+        super();
+        this.message = resource;
+        this.name = "DBInternalError"
     }
 }
