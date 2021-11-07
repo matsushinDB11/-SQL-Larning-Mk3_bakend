@@ -11,6 +11,7 @@ export class PrismaInfra implements DBClient {
     NewDBClient(Prisma: PrismaClient) {
         this.Prisma = Prisma
         this.isTransactionValid = false;
+        return PrismaInfra;
     }
     ConnectDB() {
         if (this.Prisma == undefined){
@@ -18,17 +19,13 @@ export class PrismaInfra implements DBClient {
         }
         return this.Prisma;
     }
-    CreateTransaction(): undefined {
-        return undefined;
+    CreateTransaction():void {
     }
-    Rollback(): undefined {
-        return undefined;
+    Rollback(): void {
     }
-    CloseTransaction(): DBClient | undefined {
-        return undefined;
+    CloseTransaction(): void {
     }
 
-    CommitTransaction(): DBClient | undefined {
-        return undefined;
+    CommitTransaction(): void {
     }
 }
