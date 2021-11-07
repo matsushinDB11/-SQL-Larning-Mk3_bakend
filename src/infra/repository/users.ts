@@ -1,6 +1,6 @@
 import {Repository, user as userDomain} from "../../domain/users";
 import {Failure, Result, Success} from "../../errorTypes/resultType";
-import {resourceNotFoundError} from "../../errorTypes/errors";
+import {DBInternalError, resourceNotFoundError} from "../../errorTypes/errors";
 import {DBClient} from "../../domain/DBClient";
 import {PrismaInfra} from "./PrismaInfra";
 
@@ -36,5 +36,18 @@ export class usersInfra implements Repository {
             }
             return new Success(resData);
         }
+    }
+    Add = async (dbClient: DBClient, email: string, name: string): Promise<Result<void, Error>> => {
+        try {
+            await dbClient.ConnectDB().user.create({
+                data: {
+                    email: email,
+                    name: name
+                }
+            })
+        } catch (e) {
+            return new Failure(new DBInternalError("Add User Fail"))
+        }
+        return new Success(undefined);
     }
 }
