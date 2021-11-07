@@ -1,10 +1,11 @@
 import {PrismaClient} from "@prisma/client";
+import {DBClient} from "./DBClient";
 import {Result} from "../errorTypes/resultType";
 import {resourceNotFoundError} from "../errorTypes/errors";
 
 export interface Repository {
-    GetList(prisma: PrismaClient):Promise<user[]>;
-    Get(prisma: PrismaClient, userID: number):Promise<Result<user, resourceNotFoundError>>;
+    GetList(dbClient: DBClient):Promise<user[]>;
+    Get(dbClient: DBClient, userID: number):Promise<Result<user, resourceNotFoundError>>;
 }
 
 export type user = {

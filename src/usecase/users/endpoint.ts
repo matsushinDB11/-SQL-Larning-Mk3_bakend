@@ -1,5 +1,5 @@
 import {convertGetOutput, convertListOutput, ListOutput, user,} from "./output";
-import {PrismaClient} from "@prisma/client";
+import {DBClient} from "../../domain/DBClient";
 import {Repository} from "../../domain/users";
 import {getList, get} from "./logic";
 import {GetInput} from "./input";
@@ -12,17 +12,17 @@ export type Interactor = {
 
 export class usersUsecase implements Interactor {
     private readonly repository: Repository;
-    private readonly prisma: PrismaClient
-    constructor(repository: Repository, prisma: PrismaClient) {
+    private readonly dbClient: DBClient
+    constructor(repository: Repository, dbClient: DBClient) {
         this.repository = repository;
-        this.prisma = prisma
+        this.dbClient = dbClient
     }
     async GetList(): Promise<ListOutput> {
-        const data = await getList(this.prisma, this.repository);
+        const data = await getList(this.dbClient, this.repository);
         return convertListOutput(data);
     }
     async Get(input: GetInput): Promise<Result<user, Error>> {
-        const data = await get(this.prisma, this.repository, input)
+        const data = await get(this.dbClient, this.repository, input)
         if (data.isFailure()) {
             return new Failure(data.value);
         } else {

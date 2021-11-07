@@ -1,11 +1,12 @@
 import {Repository, user as userDomain} from "../../domain/users";
-import {PrismaClient} from "@prisma/client";
 import {Failure, Result, Success} from "../../errorTypes/resultType";
 import {resourceNotFoundError} from "../../errorTypes/errors";
+import {DBClient} from "../../domain/DBClient";
+import {PrismaInfra} from "./PrismaInfra";
 
 export class usersInfra implements Repository {
-    GetList = async (prisma: PrismaClient): Promise<userDomain[]> => {
-        const rowData = await prisma.user.findMany()
+    GetList = async (dbClient: PrismaInfra): Promise<userDomain[]> => {
+        const rowData = await dbClient.ConnectDB().user.findMany()
         let resData: userDomain[] = [];
         for (let Key in rowData) {
             resData.push({
@@ -17,8 +18,8 @@ export class usersInfra implements Repository {
         return resData;
     };
 
-    Get = async (prisma: PrismaClient, userID: number): Promise<Result<userDomain, resourceNotFoundError>> => {
-        const rowData = await prisma.user.findUnique({
+    Get = async (dbClient: DBClient, userID: number): Promise<Result<userDomain, resourceNotFoundError>> => {
+        const rowData = await dbClient.ConnectDB().user.findUnique({
             where: {
                 id: userID,
             },
