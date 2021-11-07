@@ -1,6 +1,8 @@
 import {Interactor} from "../usecase/users/endpoint"
 import express from "express";
 import {GetInput} from "../usecase/users/input";
+import HttpStatusCodes from "../domain/httpStatusCodes";
+const http = new HttpStatusCodes();
 
 export class usersController {
     protected interactor: Interactor;
@@ -18,9 +20,9 @@ export class usersController {
         };
         const data = await this.interactor.Get(input);
         if (data.isFailure()) {
-            res.status(400).json(data.value);
+            res.status(http.StatusNotFound()).json(data.value);
         } else {
-            res.status(200).json(data.value);
+            res.status(http.StatusOK()).json(data.value);
         }
     }
 }
