@@ -1,13 +1,14 @@
 import {convertGetOutput, convertListOutput, ListOutput, user,} from "./output";
 import {DBClient} from "../../domain/DBClient";
 import {Repository} from "../../domain/users";
-import {getList, get} from "./logic";
-import {GetInput} from "./input";
+import {getList, get, add} from "./logic";
+import {AddInput, GetInput} from "./input";
 import {Failure, Result, Success} from "../../errorTypes/resultType";
 
 export type Interactor = {
     GetList(): Promise<ListOutput>;
     Get(input: GetInput): Promise<Result<user, Error>>;
+    Add(input: AddInput): Promise<Result<void, Error>>;
 }
 
 export class usersUsecase implements Interactor {
@@ -27,6 +28,14 @@ export class usersUsecase implements Interactor {
             return new Failure(data.value);
         } else {
             return new Success(convertGetOutput(data.value));
+        }
+    }
+    async Add(input: AddInput): Promise<Result<void, Error>> {
+        const res = await add(this.dbClient, this.repository, input);
+        if (res.isFailure()) {
+            return new Failure(res.value);
+        } else {
+            return new Success(undefined);
         }
     }
 }
