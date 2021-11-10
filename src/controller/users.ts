@@ -3,7 +3,6 @@ import express from "express";
 import {AddInput, GetInput} from "../usecase/users/input";
 import HttpStatusCodes from "../domain/httpStatusCodes";
 import ErrorToHttpStatus from "./errorToHttpStatus";
-import {Failure, Success} from "../errorTypes/resultType";
 const http = new HttpStatusCodes();
 
 export class usersController {
@@ -38,7 +37,7 @@ export class usersController {
         if (re.isFailure()) {
             res.status(ErrorToHttpStatus(re.value)).json(re.value);
         } else {
-            res.status(http.StatusNoContent());
+            res.status(http.StatusNoContent()).send();
         }
     }
 }
