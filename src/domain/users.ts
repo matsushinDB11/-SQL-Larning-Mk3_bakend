@@ -5,7 +5,7 @@ export interface Repository {
     GetList(dbClient: DBClient):Promise<user[]>;
     Get(dbClient: DBClient, userID: number):Promise<Result<user, Error>>;
     Add(dbClient: DBClient, email: string, name: string):Promise<Result<void, Error>>;
-    Update(dbClient: DBClient,userID: number, email: string, name: string):Promise<Result<void, Error>>;
+    Update(dbClient: DBClient,userID: number, email: string | undefined, name: string | undefined):Promise<Result<void, Error>>;
 }
 
 export type user = {
