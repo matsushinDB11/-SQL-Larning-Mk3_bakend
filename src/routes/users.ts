@@ -48,14 +48,35 @@ export default function usersRouter(s:Service):express.Router {
    *      summary: ユーザー追加
    *      description: Add User
    *      response:
-   *       204:
+   *       201:
    *        description: Success
    *       400:
    *        description: Bad request
+   *       500:
+   *        Internal Server Error
    */
   // POSTリクエスト
   router.post('/', (req: express.Request, res: express.Response) => {
     s.users.Add(req, res);
   });
+  /**
+   * @swagger
+   * /users/:id:
+   *  put:
+   *    tags: [Users]
+   *    summary: ユーザ情報修正
+   *    description: Update User
+   *    response:
+   *    201:
+   *      description: Success
+   *    400:
+   *      description: Bad request
+   *    500:
+   *      description: Internal Server Error
+   */
+  router.put('/:id', (req:express.Request, res:express.Response) => {
+    s.users.Update(req, res);
+  });
+
   return router;
 }

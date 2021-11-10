@@ -55,12 +55,13 @@
         "summary": "ユーザー追加",
         "description": "Add User",
         "response": {
-          "204": {
+          "201": {
             "description": "Success"
           },
           "400": {
             "description": "Bad request"
-          }
+          },
+          "500": "Internal Server Error"
         }
       }
     },
@@ -81,6 +82,25 @@
             "content": "application/json"
           }
         }
+      }
+    },
+    "/users/:id": {
+      "put": {
+        "201": {
+          "description": "Success"
+        },
+        "400": {
+          "description": "Bad request"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        },
+        "tags": [
+          "Users"
+        ],
+        "summary": "ユーザ情報修正",
+        "description": "Update User",
+        "response": null
       }
     }
   },
