@@ -1,6 +1,6 @@
 import {Interactor} from "../usecase/users/endpoint"
 import express from "express";
-import {AddInput, GetInput} from "../usecase/users/input";
+import {AddInput, GetInput, UpdateInput} from "../usecase/users/input";
 import HttpStatusCodes from "../domain/httpStatusCodes";
 import ErrorToHttpStatus from "./errorToHttpStatus";
 const http = new HttpStatusCodes();
@@ -37,7 +37,23 @@ export class usersController {
         if (re.isFailure()) {
             res.status(ErrorToHttpStatus(re.value)).json(re.value);
         } else {
-            res.status(http.StatusNoContent()).send();
+            res.status(http.StatusCreated()).send();
+        }
+    }
+    Update = async (req: express.Request, res: express.Response) => {
+        const id = req.body.id;
+        const email = req.body.email;
+        const name = req.body.name;
+        const input: UpdateInput = {
+            userID: id,
+            email: email,
+            name: name
+        }
+        const re = await this.interactor.Update(input)
+        if (re.isFailure()) {
+            res.status(ErrorToHttpStatus(re.value)).json(re.value);
+        } else {
+            res.status(http.StatusCreated()).send();
         }
     }
 }
