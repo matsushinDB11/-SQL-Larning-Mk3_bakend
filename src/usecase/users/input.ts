@@ -9,6 +9,6 @@ export type AddInput = {
 
 export type UpdateInput = {
     userID: number
-    name: string
-    email: string
+    name: string | undefined
+    email: string | undefined
 }
