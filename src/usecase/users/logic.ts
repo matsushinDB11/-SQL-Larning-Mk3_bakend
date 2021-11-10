@@ -1,6 +1,6 @@
 import {Repository, user as userDomain} from "../../domain/users";
 import {DBClient} from "../../domain/DBClient";
-import {AddInput, GetInput} from "./input";
+import {AddInput, GetInput, UpdateInput} from "./input";
 import {Failure, Result, Success} from "../../errorTypes/resultType";
 
 
@@ -19,6 +19,15 @@ export async function get(dbClient: DBClient, userRepo: Repository, input: GetIn
 
 export async function add(dbClient: DBClient, userRepo: Repository, input: AddInput):Promise<Result<void, Error>> {
     const res = await userRepo.Add(dbClient, input.email, input.name);
+    if (res.isFailure()) {
+        return new Failure(res.value);
+    } else {
+        return new Success(undefined);
+    }
+}
+
+export async function update( dbClient:DBClient, userRepo: Repository, input: UpdateInput):Promise<Result<void, Error>> {
+    const res = await userRepo.Update(dbClient, input.userID, input.email, input.name);
     if (res.isFailure()) {
         return new Failure(res.value);
     } else {

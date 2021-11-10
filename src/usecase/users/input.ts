@@ -6,3 +6,9 @@ export type AddInput = {
     name: string
     email: string
 }
+
+export type UpdateInput = {
+    userID: number
+    name: string
+    email: string
+}
