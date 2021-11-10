@@ -50,4 +50,20 @@ export class usersInfra implements Repository {
         }
         return new Success(undefined);
     }
+
+    Update = async (dbClient: DBClient, userID: number, email: string, name: string):Promise<Result<void, Error>> => {
+        try {
+            await dbClient.ConnectDB().user.update({
+                where: {id: userID},
+                data: {
+                    email: email,
+                    name: name
+                }
+            })
+        } catch (e) {
+            return new Failure(new DBInternalError("Update User Fail"))
+        }
+        return new Success(undefined);
+    }
+
 }
