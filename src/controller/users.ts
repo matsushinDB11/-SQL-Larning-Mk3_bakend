@@ -10,37 +10,46 @@ export class usersController {
     constructor(interactor: Interactor) {
         this.interactor = interactor;
     }
-    async GetList(req: express.Request, res: express.Response) {
-        const data = await this.interactor.GetList();
-        res.status(200).json(data);
+    GetList(req: express.Request, res: express.Response) {
+        this.interactor.GetList().then((data) => {
+            res.status(200).json(data);
+        }).catch(()=>{
+            res.status(500).send()
+        })
     }
-    async Get(req: express.Request, res: express.Response) {
+    Get(req: express.Request, res: express.Response) {
         const stringParam = req.params.id;
         const input: GetInput = {
             userID: Number(stringParam)
         };
-        const data = await this.interactor.Get(input);
-        if (data.isFailure()) {
-            res.status(ErrorToHttpStatus(data.value)).json(data.value);
-        } else {
-            res.status(http.StatusOK()).json(data.value);
-        }
+        this.interactor.Get(input).then((data)=> {
+            if (data.isFailure()) {
+                res.status(ErrorToHttpStatus(data.value)).json(data.value);
+            } else {
+                res.status(http.StatusOK()).json(data.value);
+            }
+        }).catch(()=>{
+            res.status(500).send()
+        })
     }
-    async Add(req: express.Request, res: express.Response) {
+    Add(req: express.Request, res: express.Response) {
         const name: string = req.body.name;
         const email: string = req.body.email;
         const input: AddInput = {
             name: name,
             email: email
         }
-        const re = await this.interactor.Add(input)
-        if (re.isFailure()) {
-            res.status(ErrorToHttpStatus(re.value)).json(re.value);
-        } else {
-            res.status(http.StatusCreated()).send();
-        }
+        this.interactor.Add(input).then((re) => {
+            if (re.isFailure()) {
+                res.status(ErrorToHttpStatus(re.value)).json(re.value);
+            } else {
+                res.status(http.StatusCreated()).send();
+            }
+        }).catch(()=>{
+            res.status(500).send()
+        })
     }
-    Update = async (req: express.Request, res: express.Response) => {
+    Update = (req: express.Request, res: express.Response) => {
         const stringId = req.params.id;
         const email:string = req.body.email;
         const name:string = req.body.name;
@@ -49,23 +58,29 @@ export class usersController {
             email: email,
             name: name
         }
-        const re = await this.interactor.Update(input)
-        if (re.isFailure()) {
-            res.status(ErrorToHttpStatus(re.value)).json(re.value);
-        } else {
-            res.status(http.StatusCreated()).send();
-        }
+        this.interactor.Update(input).then((re)=> {
+            if (re.isFailure()) {
+                res.status(ErrorToHttpStatus(re.value)).json(re.value);
+            } else {
+                res.status(http.StatusCreated()).send();
+            }
+        }).catch(()=>{
+            res.status(500).send()
+        })
     }
-    Delete = async (req: express.Request, res: express.Response) => {
+    Delete = (req: express.Request, res: express.Response) => {
         const stringId:string = req.params.id;
         const input: DeleteInput = {
             userID: Number(stringId)
         }
-        const re = await this.interactor.Delete(input);
-        if (re.isFailure()) {
-            res.status(ErrorToHttpStatus(re.value)).json(re.value);
-        } else {
-            res.status(http.StatusNoContent()).send();
-        }
+        this.interactor.Delete(input).then((re) => {
+            if (re.isFailure()) {
+                res.status(ErrorToHttpStatus(re.value)).json(re.value);
+            } else {
+                res.status(http.StatusNoContent()).send();
+            }
+        }).catch(()=>{
+            res.status(500).send()
+        });
     }
 }

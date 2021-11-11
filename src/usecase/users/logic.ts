@@ -2,7 +2,6 @@ import {Repository, user as userDomain} from "../../domain/users";
 import {DBClient} from "../../domain/DBClient";
 import {AddInput, DeleteInput, GetInput, UpdateInput} from "./input";
 import {Failure, Result, Success} from "../../errorTypes/resultType";
-import express from "express";
 
 
 export async function getList(dbClient: DBClient, userRepo: Repository):Promise<userDomain[]> {

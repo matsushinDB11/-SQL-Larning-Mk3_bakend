@@ -12,7 +12,7 @@ export class usersInfra implements Repository {
             resData.push({
                 ID: data.id,
                 email: data.email,
-                name: data.email
+                name: data.name
             })
         })
         return resData;
