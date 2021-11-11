@@ -28,6 +28,13 @@ export default function usersRouter(s:Service):express.Router {
    *    tags: [User]
    *    summary: ユーザー詳細取得
    *    description: Get user info
+   *    parameters:
+   *    - name: id
+   *      in: path
+   *      description: user id to fetch
+   *      required: true
+   *      schema:
+   *        type: number
    *    response:
    *      200:
    *        description: Success
@@ -44,9 +51,35 @@ export default function usersRouter(s:Service):express.Router {
    * @swagger
    * /users:
    *    post:
-   *      tags: [User]
+   *      tags:
+   *      - User
    *      summary: ユーザー追加
    *      description: Add User
+   *      consumes:
+   *       - application/json
+   *      parameters:
+   *      - in: body
+   *        name: body
+   *        description: Add User Object
+   *        required: true
+   *        schema:
+   *          type: object
+   *          properties:
+   *           name:
+   *            type: string
+   *           email:
+   *            type: string
+   *
+   *      requestBody:
+   *        content:
+   *          'application/json':
+   *            schema:
+   *              type: object
+   *              properties:
+   *                name:
+   *                  type: string
+   *                email:
+   *                  type: string
    *      response:
    *       201:
    *        description: Success
@@ -63,9 +96,11 @@ export default function usersRouter(s:Service):express.Router {
    * @swagger
    * /users/:id:
    *  put:
-   *    tags: [Users]
+   *    tags:
+   *    - User
    *    summary: ユーザ情報修正
    *    description: Update User
+   *
    *    response:
    *    201:
    *      description: Success
