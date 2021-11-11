@@ -8,13 +8,13 @@ export class usersInfra implements Repository {
     GetList = async (dbClient: PrismaInfra): Promise<userDomain[]> => {
         const rowData = await dbClient.ConnectDB().user.findMany()
         const resData: userDomain[] = [];
-        for (const Key in rowData) {
+        rowData.forEach((data) => {
             resData.push({
-                ID: rowData[Key].id,
-                email: rowData[Key].email,
-                name: rowData[Key].name
+                ID: data.id,
+                email: data.email,
+                name: data.email
             })
-        }
+        })
         return resData;
     };
 

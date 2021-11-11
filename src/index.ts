@@ -25,4 +25,4 @@ const port = process.env.PORT || 3000;
 
 // APIサーバ起動
 app.listen(port);
-console.log('Express WebApi listening on port ' + port);
+console.log('Express WebApi listening on port ' + String(port));

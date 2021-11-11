@@ -1,5 +1,3 @@
-import exp from "constants";
-
 export type Result<T, E> = Success<T, E> | Failure<T, E>
 
 export class Success<T, E> {

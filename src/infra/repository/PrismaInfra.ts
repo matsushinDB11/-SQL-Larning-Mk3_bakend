@@ -20,12 +20,16 @@ export class PrismaInfra implements DBClient {
         return this.Prisma;
     }
     CreateTransaction():void {
+        return
     }
     Rollback(): void {
+        return
     }
     CloseTransaction(): void {
+        return
     }
 
     CommitTransaction(): void {
+        return
     }
 }
