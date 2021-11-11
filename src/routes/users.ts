@@ -3,6 +3,11 @@ import {Service} from "../di/di";
 
 export default function usersRouter(s:Service):express.Router {
   const router = express.Router();
+  // GET 一覧取得
+  router.get('/', (req: express.Request, res: express.Response) => {
+    // res.status(200).json({ userId: "U001", userName: "Yamada Taro" });
+    s.users.GetList(req, res);
+  });
   /**
    *  @swagger
    *  /users:
@@ -15,12 +20,11 @@ export default function usersRouter(s:Service):express.Router {
    *        description: Success
    *        content: application/json
    */
-  // GET 一覧取得
-  router.get('/', (req: express.Request, res: express.Response) => {
-    // res.status(200).json({ userId: "U001", userName: "Yamada Taro" });
-    s.users.GetList(req, res);
-  });
 
+  // Get 詳細取得
+  router.get('/:id',(req: express.Request, res: express.Response)=> {
+    s.users.Get(req, res);
+  })
   /**
    * @swagger
    * /user/:id:
@@ -43,11 +47,11 @@ export default function usersRouter(s:Service):express.Router {
    *        description: Resource not found error
    *        content: application/json
    */
-  // Get 詳細取得
-  router.get('/:id',(req: express.Request, res: express.Response)=> {
-    s.users.Get(req, res);
-  })
 
+  // POSTリクエスト
+  router.post('/', (req: express.Request, res: express.Response) => {
+    s.users.Add(req, res);
+  });
   /**
    * @swagger
    * /users:
@@ -89,9 +93,9 @@ export default function usersRouter(s:Service):express.Router {
    *       500:
    *        Internal Server Error
    */
-  // POSTリクエスト
-  router.post('/', (req: express.Request, res: express.Response) => {
-    s.users.Add(req, res);
+  // ユーザー情報修正
+  router.put('/:id', (req:express.Request, res:express.Response) => {
+    s.users.Update(req, res);
   });
   /**
    * @swagger
@@ -110,9 +114,5 @@ export default function usersRouter(s:Service):express.Router {
    *    500:
    *      description: Internal Server Error
    */
-  router.put('/:id', (req:express.Request, res:express.Response) => {
-    s.users.Update(req, res);
-  });
-
   return router;
 }
