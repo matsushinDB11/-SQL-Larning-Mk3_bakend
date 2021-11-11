@@ -15,7 +15,7 @@ export default function usersRouter(s:Service):express.Router {
    *        description: Success
    *        content: application/json
    */
-  // GETリクエスト
+  // GET 一覧取得
   router.get('/', (req: express.Request, res: express.Response) => {
     // res.status(200).json({ userId: "U001", userName: "Yamada Taro" });
     s.users.GetList(req, res);
@@ -43,6 +43,7 @@ export default function usersRouter(s:Service):express.Router {
    *        description: Resource not found error
    *        content: application/json
    */
+  // Get 詳細取得
   router.get('/:id',(req: express.Request, res: express.Response)=> {
     s.users.Get(req, res);
   })

@@ -41,11 +41,11 @@ export class usersController {
         }
     }
     Update = async (req: express.Request, res: express.Response) => {
-        const id = req.body.id;
+        const stringId = req.params.id;
         const email = req.body.email;
         const name = req.body.name;
         const input: UpdateInput = {
-            userID: id,
+            userID: Number(stringId),
             email: email,
             name: name
         }
