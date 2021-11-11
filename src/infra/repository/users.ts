@@ -66,4 +66,15 @@ export class usersInfra implements Repository {
         return new Success(undefined);
     }
 
+    Delete = async (dbClient:DBClient, userID: number):Promise<Result<void, Error>> => {
+        try {
+            await dbClient.ConnectDB().user.delete({
+                where: {id: userID}
+            })
+        }  catch (e) {
+            return new Failure(new DBInternalError("Delete User Fail"))
+        }
+        return new Success(undefined);
+    }
+
 }
