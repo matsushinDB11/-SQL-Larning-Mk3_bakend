@@ -116,7 +116,7 @@ export default function usersRouter(s:Service):express.Router {
    */
   // ユーザー削除
   router.delete('/:id', (req:express.Request, res:express.Response) => {
-
+    s.users.Delete(req, res);
   });
   return router;
 }

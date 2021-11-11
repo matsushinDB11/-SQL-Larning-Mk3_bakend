@@ -10,6 +10,7 @@ export type Interactor = {
     Get(input: GetInput): Promise<Result<user, Error>>;
     Add(input: AddInput): Promise<Result<void, Error>>;
     Update(input: UpdateInput): Promise<Result<void, Error>>;
+    Delete(input: DeleteInput): Promise<Result<void, Error>>;
 }
 
 export class usersUsecase implements Interactor {

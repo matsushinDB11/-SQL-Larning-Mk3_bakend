@@ -1,6 +1,6 @@
 import {Interactor} from "../usecase/users/endpoint"
 import express from "express";
-import {AddInput, GetInput, UpdateInput} from "../usecase/users/input";
+import {AddInput, DeleteInput, GetInput, UpdateInput} from "../usecase/users/input";
 import HttpStatusCodes from "../domain/httpStatusCodes";
 import ErrorToHttpStatus from "./errorToHttpStatus";
 const http = new HttpStatusCodes();
@@ -54,6 +54,18 @@ export class usersController {
             res.status(ErrorToHttpStatus(re.value)).json(re.value);
         } else {
             res.status(http.StatusCreated()).send();
+        }
+    }
+    Delete = async (req: express.Request, res: express.Response) => {
+        const stringId = req.params.id;
+        const input: DeleteInput = {
+            userID: Number(stringId)
+        }
+        const re = await this.interactor.Delete(input);
+        if (re.isFailure()) {
+            res.status(ErrorToHttpStatus(re.value)).json(re.value);
+        } else {
+            res.status(http.StatusNoContent()).send();
         }
     }
 }
