@@ -27,8 +27,8 @@ export class usersController {
         }
     }
     async Add(req: express.Request, res: express.Response) {
-        const name = req.body.name;
-        const email = req.body.email;
+        const name: string = req.body.name;
+        const email: string = req.body.email;
         const input: AddInput = {
             name: name,
             email: email
@@ -42,8 +42,8 @@ export class usersController {
     }
     Update = async (req: express.Request, res: express.Response) => {
         const stringId = req.params.id;
-        const email = req.body.email;
-        const name = req.body.name;
+        const email:string = req.body.email;
+        const name:string = req.body.name;
         const input: UpdateInput = {
             userID: Number(stringId),
             email: email,
@@ -57,7 +57,7 @@ export class usersController {
         }
     }
     Delete = async (req: express.Request, res: express.Response) => {
-        const stringId = req.params.id;
+        const stringId:string = req.params.id;
         const input: DeleteInput = {
             userID: Number(stringId)
         }
