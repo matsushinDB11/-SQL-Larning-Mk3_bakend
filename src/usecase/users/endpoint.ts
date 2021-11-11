@@ -1,8 +1,8 @@
 import {convertGetOutput, convertListOutput, ListOutput, user,} from "./output";
 import {DBClient} from "../../domain/DBClient";
 import {Repository} from "../../domain/users";
-import {getList, get, add, update} from "./logic";
-import {AddInput, GetInput, UpdateInput} from "./input";
+import {getList, get, add, update, del} from "./logic";
+import {AddInput, DeleteInput, GetInput, UpdateInput} from "./input";
 import {Failure, Result, Success} from "../../errorTypes/resultType";
 
 export type Interactor = {
@@ -41,6 +41,15 @@ export class usersUsecase implements Interactor {
     }
     Update = async (input: UpdateInput): Promise<Result<void, Error>> => {
         const res = await update(this.dbClient, this.repository, input);
+        if (res.isFailure()) {
+            return new Failure(res.value);
+        } else {
+            return new Success(undefined);
+        }
+    }
+
+    Delete = async (input: DeleteInput): Promise<Result<void, Error>> => {
+        const res = await del(this.dbClient, this.repository, input);
         if (res.isFailure()) {
             return new Failure(res.value);
         } else {

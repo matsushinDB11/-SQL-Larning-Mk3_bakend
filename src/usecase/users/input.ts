@@ -12,3 +12,7 @@ export type UpdateInput = {
     name: string | undefined
     email: string | undefined
 }
+
+export type DeleteInput = {
+    userID: number
+}
