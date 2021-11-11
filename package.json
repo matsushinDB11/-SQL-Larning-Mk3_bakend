@@ -25,12 +25,13 @@
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn src/index.ts",
+    "dev": "ts-node-dev --respawn src/",
     "clean": "rimraf dist",
     "tsc": "tsc",
     "build": "npm-run-all clean tsc",
     "start": "node .",
-    "make_doc": "swagger-jsdoc -d swaggerDefinition.cjs ./src/routes/**.ts"
+    "make_doc": "swagger-jsdoc -d swaggerDefinition.cjs ./src/routes/**.ts",
+    "eslint": "eslint src/"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
