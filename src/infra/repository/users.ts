@@ -7,8 +7,8 @@ import {PrismaInfra} from "./PrismaInfra";
 export class usersInfra implements Repository {
     GetList = async (dbClient: PrismaInfra): Promise<userDomain[]> => {
         const rowData = await dbClient.ConnectDB().user.findMany()
-        let resData: userDomain[] = [];
-        for (let Key in rowData) {
+        const resData: userDomain[] = [];
+        for (const Key in rowData) {
             resData.push({
                 ID: rowData[Key].id,
                 email: rowData[Key].email,
