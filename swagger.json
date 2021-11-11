@@ -54,13 +54,53 @@
         ],
         "summary": "ユーザー追加",
         "description": "Add User",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Add User Object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
         "response": {
-          "204": {
+          "201": {
             "description": "Success"
           },
           "400": {
             "description": "Bad request"
-          }
+          },
+          "500": "Internal Server Error"
         }
       }
     },
@@ -71,6 +111,17 @@
         ],
         "summary": "ユーザー詳細取得",
         "description": "Get user info",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user id to fetch",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
         "response": {
           "200": {
             "description": "Success",
@@ -81,6 +132,25 @@
             "content": "application/json"
           }
         }
+      }
+    },
+    "/users/:id": {
+      "put": {
+        "201": {
+          "description": "Success"
+        },
+        "400": {
+          "description": "Bad request"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        },
+        "tags": [
+          "User"
+        ],
+        "summary": "ユーザ情報修正",
+        "description": "Update User",
+        "response": null
       }
     }
   },

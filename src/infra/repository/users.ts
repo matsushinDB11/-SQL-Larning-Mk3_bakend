@@ -50,4 +50,31 @@ export class usersInfra implements Repository {
         }
         return new Success(undefined);
     }
+
+    Update = async (dbClient: DBClient, userID: number, email: string | undefined, name: string | undefined):Promise<Result<void, Error>> => {
+        try {
+            await dbClient.ConnectDB().user.update({
+                where: {id: userID},
+                data: {
+                    email: email,
+                    name: name
+                }
+            })
+        } catch (e) {
+            return new Failure(new DBInternalError("Update User Fail"))
+        }
+        return new Success(undefined);
+    }
+
+    Delete = async (dbClient:DBClient, userID: number):Promise<Result<void, Error>> => {
+        try {
+            await dbClient.ConnectDB().user.delete({
+                where: {id: userID}
+            })
+        }  catch (e) {
+            return new Failure(new DBInternalError("Delete User Fail"))
+        }
+        return new Success(undefined);
+    }
+
 }
