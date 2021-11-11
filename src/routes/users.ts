@@ -114,5 +114,9 @@ export default function usersRouter(s:Service):express.Router {
    *    500:
    *      description: Internal Server Error
    */
+  // ユーザー削除
+  router.delete('/:id', (req:express.Request, res:express.Response) => {
+
+  });
   return router;
 }
