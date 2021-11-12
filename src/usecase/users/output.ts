@@ -1,4 +1,3 @@
-import {User} from "@prisma/client"
 import {user as userDomain} from "../../domain/users";
 
 export type user = {
@@ -20,8 +19,7 @@ export function convertGetOutput(input: userDomain):user{
 }
 
 export function convertListOutput(input: userDomain[]): ListOutput {
-    let output: ListOutput;
-    output = {
+    const output:ListOutput = {
         users: []
     };
     for (const i of input) {

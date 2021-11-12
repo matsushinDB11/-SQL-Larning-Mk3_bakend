@@ -29,10 +29,9 @@ function convertGetOutput(input: domainEmployee):employee {
 }
 
 export function convertListOutput(input: domainEmployee[]): ListOutput {
-    let output: ListOutput;
-    output = {
+    const output: ListOutput = {
         employees: []
-    };
+    }
     for (const i of input) {
         output.employees.push(convertGetOutput(i))
     }
