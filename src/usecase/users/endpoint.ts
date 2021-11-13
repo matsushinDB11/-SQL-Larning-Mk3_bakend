@@ -1,9 +1,14 @@
-import {convertGetOutput, convertListOutput, ListOutput, user,} from "./output";
-import {DBClient} from "../../domain/DBClient";
-import {Repository} from "../../domain/users";
-import {getList, get, add, update, del} from "./logic";
-import {AddInput, DeleteInput, GetInput, UpdateInput} from "./input";
-import {Failure, Result, Success} from "../../errorTypes/resultType";
+import {
+    convertGetOutput,
+    convertListOutput,
+    ListOutput,
+    user,
+} from "./output";
+import { DBClient } from "../../domain/DBClient";
+import { Repository } from "../../domain/users";
+import { getList, get, add, update, del } from "./logic";
+import { AddInput, DeleteInput, GetInput, UpdateInput } from "./input";
+import { Failure, Result, Success } from "../../errorTypes/resultType";
 
 export type Interactor = {
     GetList(): Promise<ListOutput>;
@@ -11,21 +16,21 @@ export type Interactor = {
     Add(input: AddInput): Promise<Result<void, Error>>;
     Update(input: UpdateInput): Promise<Result<void, Error>>;
     Delete(input: DeleteInput): Promise<Result<void, Error>>;
-}
+};
 
 export class usersUsecase implements Interactor {
     private readonly repository: Repository;
-    private readonly dbClient: DBClient
+    private readonly dbClient: DBClient;
     constructor(repository: Repository, dbClient: DBClient) {
         this.repository = repository;
-        this.dbClient = dbClient
+        this.dbClient = dbClient;
     }
     async GetList(): Promise<ListOutput> {
         const data = await getList(this.dbClient, this.repository);
         return convertListOutput(data);
     }
     async Get(input: GetInput): Promise<Result<user, Error>> {
-        const data = await get(this.dbClient, this.repository, input)
+        const data = await get(this.dbClient, this.repository, input);
         if (data.isFailure()) {
             return new Failure(data.value);
         } else {
@@ -47,7 +52,7 @@ export class usersUsecase implements Interactor {
         } else {
             return new Success(undefined);
         }
-    }
+    };
 
     Delete = async (input: DeleteInput): Promise<Result<void, Error>> => {
         const res = await del(this.dbClient, this.repository, input);
@@ -56,5 +61,5 @@ export class usersUsecase implements Interactor {
         } else {
             return new Success(undefined);
         }
-    }
+    };
 }

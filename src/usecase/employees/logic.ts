@@ -1,7 +1,9 @@
-import {employee, Repository} from "../../domain/employees/repository";
-import {PrismaClient} from "@prisma/client";
+import { employee, Repository } from "../../domain/employees/repository";
+import { PrismaClient } from "@prisma/client";
 
-
-export function getList(prisma: PrismaClient,employeeRepo: Repository):employee[] {
-    return  employeeRepo.GetList(prisma);
+export function getList(
+    prisma: PrismaClient,
+    employeeRepo: Repository
+): employee[] {
+    return employeeRepo.GetList(prisma);
 }

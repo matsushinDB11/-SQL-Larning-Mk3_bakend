@@ -17,7 +17,7 @@ app.use("/", createRoutes(app, service));
  *         description: swagger-jsdoc test
  */
 app.get("/", (req: express.Request, res: express.Response) => {
-  res.send("This is SQL-Learning-MK3 test");
+    res.send("This is SQL-Learning-MK3 test");
 });
 
 // 3000ポートで受信

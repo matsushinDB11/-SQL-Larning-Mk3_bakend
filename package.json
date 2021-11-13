@@ -33,7 +33,8 @@
     "build": "npm-run-all clean tsc",
     "start": "node .",
     "make_doc": "swagger-jsdoc -d swaggerDefinition.cjs ./src/routes/**.ts",
-    "eslint": "eslint src/"
+    "eslint": "eslint src/",
+    "prettier": "prettier --write 'src/**/*.{js,ts,json}'"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
