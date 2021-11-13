@@ -1,21 +1,21 @@
-import {employee as domainEmployee} from "../../domain/employees/repository";
+import { employee as domainEmployee } from "../../domain/employees/repository";
 
 type employee = {
-    ID: number
-    name: string
-    height: number
-    email: string
-    weight: number
-    membershipYear: number
-    birthday: string
-    bloodType: string
-}
+    ID: number;
+    name: string;
+    height: number;
+    email: string;
+    weight: number;
+    membershipYear: number;
+    birthday: string;
+    bloodType: string;
+};
 
 export type ListOutput = {
-    employees: employee[]
-}
+    employees: employee[];
+};
 
-function convertGetOutput(input: domainEmployee):employee {
+function convertGetOutput(input: domainEmployee): employee {
     return {
         ID: input.ID,
         name: input.name,
@@ -24,17 +24,16 @@ function convertGetOutput(input: domainEmployee):employee {
         weight: input.weight,
         membershipYear: input.membershipYear,
         birthday: input.birthday,
-        bloodType: input.bloodType
+        bloodType: input.bloodType,
     };
 }
 
 export function convertListOutput(input: domainEmployee[]): ListOutput {
-    let output: ListOutput;
-    output = {
-        employees: []
+    const output: ListOutput = {
+        employees: [],
     };
     for (const i of input) {
-        output.employees.push(convertGetOutput(i))
+        output.employees.push(convertGetOutput(i));
     }
-    return output
+    return output;
 }

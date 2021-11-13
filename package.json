@@ -13,7 +13,14 @@
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/node": "^16.10.3",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "8.3.0",
+    "husky": ">=6",
+    "lint-staged": ">=10",
     "npm-run-all": "^4.1.5",
+    "prettier": "2.4.1",
     "prisma": "^3.3.0",
     "rimraf": "^3.0.2",
     "swagger-jsdoc": "^6.1.0",
@@ -22,14 +29,22 @@
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn src/index.ts",
+    "dev": "ts-node-dev --respawn src/**.ts",
     "clean": "rimraf dist",
     "tsc": "tsc",
     "build": "npm-run-all clean tsc",
     "start": "node .",
-    "make_doc": "swagger-jsdoc -d swaggerDefinition.cjs ./src/routes/**.ts"
+    "make_doc": "swagger-jsdoc -d swaggerDefinition.cjs ./src/routes/**.ts",
+    "eslint": "eslint src/",
+    "prettier": "prettier --write 'src/**/*.{js,ts,json}'",
+    "prepare": "husky install"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
+  },
+  "lint-staged": {
+    "*.{ts,js}": "eslint --cache --fix",
+    "*.ts": "tsc --noEmit",
+    "*.{ts,js}": "prettier --write"
   }
 }
