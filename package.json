@@ -17,6 +17,8 @@
     "@typescript-eslint/parser": "^5.3.1",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "8.3.0",
+    "husky": ">=6",
+    "lint-staged": ">=10",
     "npm-run-all": "^4.1.5",
     "prettier": "2.4.1",
     "prisma": "^3.3.0",
@@ -34,9 +36,15 @@
     "start": "node .",
     "make_doc": "swagger-jsdoc -d swaggerDefinition.cjs ./src/routes/**.ts",
     "eslint": "eslint src/",
-    "prettier": "prettier --write 'src/**/*.{js,ts,json}'"
+    "prettier": "prettier --write 'src/**/*.{js,ts,json}'",
+    "prepare": "husky install"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
+  },
+  "lint-staged": {
+    "*.{ts,js}": "eslint --cache --fix",
+    "*.ts": "tsc --noEmit",
+    "*.{js,css,md}": "prettier --write"
   }
 }
