@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^3.3.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1"
   },
   "devDependencies": {
@@ -40,10 +41,9 @@
     "prepare": "husky install"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node --require dotenv/config prisma/seed.ts"
   },
   "lint-staged": {
-    "*.{ts,js}": "eslint --cache --fix",
     "*.{ts,js}": "prettier --write"
   }
 }
