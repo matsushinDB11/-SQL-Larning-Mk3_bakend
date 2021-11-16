@@ -7,6 +7,7 @@ async function main() {
     await prisma.user.create({
         data: {
             email: adminEmail,
+            isAdmin: true,
         },
     });
     const allUsers = await prisma.user.findMany();
