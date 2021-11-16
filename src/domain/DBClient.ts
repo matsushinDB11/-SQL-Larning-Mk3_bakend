@@ -1,9 +1,9 @@
-import {PrismaClient} from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 export interface DBClient {
-    ConnectDB():PrismaClient;
+    ConnectDB(): PrismaClient;
     CreateTransaction(): void;
     Rollback(): void;
-    CloseTransaction():void; // Prismaでは自動
+    CloseTransaction(): void; // Prismaでは自動
     CommitTransaction(): void; // Prismaでは自動
 }

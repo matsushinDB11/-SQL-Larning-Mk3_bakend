@@ -20,20 +20,6 @@
   ],
   "swagger": "2.0",
   "paths": {
-    "/employees": {
-      "get": {
-        "tags": [
-          "employees"
-        ],
-        "summary": "従業員一覧",
-        "response": {
-          "200": {
-            "description": "Success",
-            "content": "application/json"
-          }
-        }
-      }
-    },
     "/users": {
       "get": {
         "tags": [
