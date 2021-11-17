@@ -1,11 +1,12 @@
 import { Repository, user as userDomain } from "../../domain/users";
-import { Failure, Result, Success } from "../../errorTypes/resultType";
+import { Failure, Result, Success } from "../../errorHelper/resultType";
 import {
     DBInternalError,
     resourceNotFoundError,
-} from "../../errorTypes/errors";
+} from "../../errorHelper/errors";
 import { DBClient } from "../../domain/DBClient";
 import { PrismaInfra } from "./PrismaInfra";
+import { convertPrismaError } from "../../errorHelper/helperFunc";
 
 export class usersInfra implements Repository {
     GetList = async (dbClient: PrismaInfra): Promise<userDomain[]> => {
@@ -77,7 +78,12 @@ export class usersInfra implements Repository {
                 },
             });
         } catch (e) {
-            return new Failure(new DBInternalError("Update User Fail"));
+            const errorType = convertPrismaError(
+                e,
+                "userID: " + String(userID),
+                "Update User"
+            );
+            return new Failure(errorType);
         }
         return new Success(undefined);
     };
@@ -91,7 +97,12 @@ export class usersInfra implements Repository {
                 where: { id: userID },
             });
         } catch (e) {
-            return new Failure(new DBInternalError("Delete User Fail"));
+            const errorType = convertPrismaError(
+                e,
+                "userID: " + String(userID),
+                "Delete User"
+            );
+            return new Failure(errorType);
         }
         return new Success(undefined);
     };
