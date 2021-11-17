@@ -2,7 +2,7 @@ import { DBClient } from "./DBClient";
 import { Result } from "../errorHelper/resultType";
 
 export interface Repository {
-    GetList(dbClient: DBClient): Promise<user[]>;
+    GetList(dbClient: DBClient): Promise<Result<user[], Error>>;
     Get(dbClient: DBClient, userID: number): Promise<Result<user, Error>>;
     Add(
         dbClient: DBClient,

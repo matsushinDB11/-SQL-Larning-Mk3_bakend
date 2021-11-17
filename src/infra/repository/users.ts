@@ -9,17 +9,27 @@ import { PrismaInfra } from "./PrismaInfra";
 import { convertPrismaError } from "../../errorHelper/helperFunc";
 
 export class usersInfra implements Repository {
-    GetList = async (dbClient: PrismaInfra): Promise<userDomain[]> => {
-        const rowData = await dbClient.ConnectDB().user.findMany();
-        const resData: userDomain[] = [];
-        rowData.forEach((data) => {
-            resData.push({
-                ID: data.id,
-                email: data.email,
-                isAdmin: data.isAdmin,
-            });
-        });
-        return resData;
+    GetList = async (
+        dbClient: PrismaInfra
+    ): Promise<Result<userDomain[], Error>> => {
+        try {
+            const rowData = await dbClient.ConnectDB().user.findMany();
+            if (rowData == []) {
+                return new Failure(new resourceNotFoundError("Get User List"));
+            } else {
+                const resData: userDomain[] = [];
+                rowData.forEach((data) => {
+                    resData.push({
+                        ID: data.id,
+                        email: data.email,
+                        isAdmin: data.isAdmin,
+                    });
+                });
+                return new Success(resData);
+            }
+        } catch (e) {
+            return new Failure(new DBInternalError("Get User List"));
+        }
     };
 
     Get = async (
