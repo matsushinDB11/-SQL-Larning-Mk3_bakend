@@ -1,4 +1,4 @@
-import { resourceNotFoundError } from "../errorTypes/errors";
+import { resourceNotFoundError } from "../errorHelper/errors";
 import HttpStatusCodes from "../domain/httpStatusCodes";
 
 const http = new HttpStatusCodes();
