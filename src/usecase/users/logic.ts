@@ -28,7 +28,7 @@ export async function add(
     userRepo: Repository,
     input: AddInput
 ): Promise<Result<void, Error>> {
-    const res = await userRepo.Add(dbClient, input.email, input.name);
+    const res = await userRepo.Add(dbClient, input.email);
     if (res.isFailure()) {
         return new Failure(res.value);
     } else {
@@ -41,12 +41,7 @@ export async function update(
     userRepo: Repository,
     input: UpdateInput
 ): Promise<Result<void, Error>> {
-    const res = await userRepo.Update(
-        dbClient,
-        input.userID,
-        input.email,
-        input.name
-    );
+    const res = await userRepo.Update(dbClient, input.userID, input.email);
     if (res.isFailure()) {
         return new Failure(res.value);
     } else {

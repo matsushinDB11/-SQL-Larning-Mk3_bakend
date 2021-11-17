@@ -3,14 +3,12 @@ export type GetInput = {
 };
 
 export type AddInput = {
-    name: string;
     email: string;
 };
 
 export type UpdateInput = {
     userID: number;
-    name: string | undefined;
-    email: string | undefined;
+    email: string;
 };
 
 export type DeleteInput = {
