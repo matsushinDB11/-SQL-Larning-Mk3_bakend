@@ -15,7 +15,6 @@ export class usersInfra implements Repository {
             resData.push({
                 ID: data.id,
                 email: data.email,
-                name: data.name,
             });
         });
         return resData;
@@ -39,21 +38,18 @@ export class usersInfra implements Repository {
             const resData: userDomain = {
                 ID: rowData.id,
                 email: rowData.email,
-                name: rowData.name,
             };
             return new Success(resData);
         }
     };
     Add = async (
         dbClient: DBClient,
-        email: string,
-        name: string
+        email: string
     ): Promise<Result<void, Error>> => {
         try {
             await dbClient.ConnectDB().user.create({
                 data: {
                     email: email,
-                    name: name,
                 },
             });
         } catch (e) {
@@ -65,15 +61,13 @@ export class usersInfra implements Repository {
     Update = async (
         dbClient: DBClient,
         userID: number,
-        email: string | undefined,
-        name: string | undefined
+        email: string | undefined
     ): Promise<Result<void, Error>> => {
         try {
             await dbClient.ConnectDB().user.update({
                 where: { id: userID },
                 data: {
                     email: email,
-                    name: name,
                 },
             });
         } catch (e) {
