@@ -44,10 +44,8 @@ export class usersController {
             });
     }
     Add(req: express.Request, res: express.Response) {
-        const name: string = req.body.name;
         const email: string = req.body.email;
         const input: AddInput = {
-            name: name,
             email: email,
         };
         this.interactor
@@ -66,11 +64,9 @@ export class usersController {
     Update = (req: express.Request, res: express.Response) => {
         const stringId = req.params.id;
         const email: string = req.body.email;
-        const name: string = req.body.name;
         const input: UpdateInput = {
             userID: Number(stringId),
             email: email,
-            name: name,
         };
         this.interactor
             .Update(input)
