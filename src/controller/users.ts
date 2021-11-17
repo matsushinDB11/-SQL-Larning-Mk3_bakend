@@ -19,10 +19,14 @@ export class usersController {
         this.interactor
             .GetList()
             .then((data) => {
-                res.status(200).json(data);
+                if (data.isFailure()) {
+                    res.status(ErrorToHttpStatus(data.value)).json(data.value);
+                } else {
+                    res.status(http.StatusOK()).json(data.value);
+                }
             })
             .catch(() => {
-                res.status(500).send();
+                res.status(http.StatusInternalServerError()).send();
             });
     }
     Get(req: express.Request, res: express.Response) {
@@ -40,7 +44,7 @@ export class usersController {
                 }
             })
             .catch(() => {
-                res.status(500).send();
+                res.status(http.StatusInternalServerError()).send();
             });
     }
     Add(req: express.Request, res: express.Response) {
@@ -60,7 +64,7 @@ export class usersController {
                 }
             })
             .catch(() => {
-                res.status(500).send();
+                res.status(http.StatusInternalServerError()).send();
             });
     }
     Update = (req: express.Request, res: express.Response) => {
@@ -82,7 +86,7 @@ export class usersController {
                 }
             })
             .catch(() => {
-                res.status(500).send();
+                res.status(http.StatusInternalServerError()).send();
             });
     };
     Delete = (req: express.Request, res: express.Response) => {
@@ -100,7 +104,7 @@ export class usersController {
                 }
             })
             .catch(() => {
-                res.status(500).send();
+                res.status(http.StatusInternalServerError()).send();
             });
     };
 }

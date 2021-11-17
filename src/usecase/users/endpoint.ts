@@ -11,7 +11,7 @@ import { AddInput, DeleteInput, GetInput, UpdateInput } from "./input";
 import { Failure, Result, Success } from "../../errorHelper/resultType";
 
 export type Interactor = {
-    GetList(): Promise<ListOutput>;
+    GetList(): Promise<Result<ListOutput, Error>>;
     Get(input: GetInput): Promise<Result<user, Error>>;
     Add(input: AddInput): Promise<Result<void, Error>>;
     Update(input: UpdateInput): Promise<Result<void, Error>>;
@@ -25,9 +25,13 @@ export class usersUsecase implements Interactor {
         this.repository = repository;
         this.dbClient = dbClient;
     }
-    async GetList(): Promise<ListOutput> {
+    async GetList(): Promise<Result<ListOutput, Error>> {
         const data = await getList(this.dbClient, this.repository);
-        return convertListOutput(data);
+        if (data.isFailure()) {
+            return new Failure(data.value);
+        } else {
+            return new Success(convertListOutput(data.value));
+        }
     }
     async Get(input: GetInput): Promise<Result<user, Error>> {
         const data = await get(this.dbClient, this.repository, input);

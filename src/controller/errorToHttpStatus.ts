@@ -8,6 +8,6 @@ export default function ErrorToHttpStatus(error: Error): number {
         case error instanceof resourceNotFoundError:
             return http.StatusNotFound();
         default:
-            return http.StatusStatusInternalServerError();
+            return http.StatusInternalServerError();
     }
 }

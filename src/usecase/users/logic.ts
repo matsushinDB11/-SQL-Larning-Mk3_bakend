@@ -6,8 +6,13 @@ import { Failure, Result, Success } from "../../errorHelper/resultType";
 export async function getList(
     dbClient: DBClient,
     userRepo: Repository
-): Promise<userDomain[]> {
-    return await userRepo.GetList(dbClient);
+): Promise<Result<userDomain[], Error>> {
+    const data = await userRepo.GetList(dbClient);
+    if (data.isFailure()) {
+        return new Failure(data.value);
+    } else {
+        return new Success(data.value);
+    }
 }
 
 export async function get(
