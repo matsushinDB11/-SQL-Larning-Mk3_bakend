@@ -26,23 +26,26 @@ export class usersInfra implements Repository {
         dbClient: DBClient,
         userID: number
     ): Promise<Result<userDomain, Error>> => {
-        const rowData = await dbClient.ConnectDB().user.findUnique({
-            where: {
-                id: userID,
-            },
-        });
-        if (rowData == null) {
-            return new Failure(
-                new resourceNotFoundError("memoID: " + String(userID))
-            );
-        } else {
-            // return new Success(rowData);
-            const resData: userDomain = {
-                ID: rowData.id,
-                email: rowData.email,
-                isAdmin: rowData.isAdmin,
-            };
-            return new Success(resData);
+        try {
+            const rowData = await dbClient.ConnectDB().user.findUnique({
+                where: {
+                    id: userID,
+                },
+            });
+            if (rowData == null) {
+                return new Failure(
+                    new resourceNotFoundError("memoID: " + String(userID))
+                );
+            } else {
+                const resData: userDomain = {
+                    ID: rowData.id,
+                    email: rowData.email,
+                    isAdmin: rowData.isAdmin,
+                };
+                return new Success(resData);
+            }
+        } catch (e) {
+            return new Failure(new DBInternalError("GetUser"));
         }
     };
     Add = async (
