@@ -8,7 +8,7 @@ import { DBClient } from "../../domain/DBClient";
 import { Repository } from "../../domain/users";
 import { getList, get, add, update, del } from "./logic";
 import { AddInput, DeleteInput, GetInput, UpdateInput } from "./input";
-import { Failure, Result, Success } from "../../errorTypes/resultType";
+import { Failure, Result, Success } from "../../errorHelper/resultType";
 
 export type Interactor = {
     GetList(): Promise<ListOutput>;

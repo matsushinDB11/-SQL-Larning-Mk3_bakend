@@ -1,5 +1,5 @@
 import { DBClient } from "./DBClient";
-import { Result } from "../errorTypes/resultType";
+import { Result } from "../errorHelper/resultType";
 
 export interface Repository {
     GetList(dbClient: DBClient): Promise<user[]>;

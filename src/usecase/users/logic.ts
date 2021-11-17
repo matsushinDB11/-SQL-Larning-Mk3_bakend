@@ -1,7 +1,7 @@
 import { Repository, user as userDomain } from "../../domain/users";
 import { DBClient } from "../../domain/DBClient";
 import { AddInput, DeleteInput, GetInput, UpdateInput } from "./input";
-import { Failure, Result, Success } from "../../errorTypes/resultType";
+import { Failure, Result, Success } from "../../errorHelper/resultType";
 
 export async function getList(
     dbClient: DBClient,
