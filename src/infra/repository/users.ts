@@ -44,12 +44,14 @@ export class usersInfra implements Repository {
     };
     Add = async (
         dbClient: DBClient,
-        email: string
+        email: string,
+        isAdmin: boolean | undefined
     ): Promise<Result<void, Error>> => {
         try {
             await dbClient.ConnectDB().user.create({
                 data: {
                     email: email,
+                    isAdmin: isAdmin,
                 },
             });
         } catch (e) {
@@ -61,13 +63,15 @@ export class usersInfra implements Repository {
     Update = async (
         dbClient: DBClient,
         userID: number,
-        email: string
+        email: string,
+        isAdmin: boolean | undefined
     ): Promise<Result<void, Error>> => {
         try {
             await dbClient.ConnectDB().user.update({
                 where: { id: userID },
                 data: {
                     email: email,
+                    isAdmin: isAdmin,
                 },
             });
         } catch (e) {
