@@ -8,7 +8,7 @@ export interface Repository {
     Update(
         dbClient: DBClient,
         userID: number,
-        email: string | undefined
+        email: string
     ): Promise<Result<void, Error>>;
     Delete(dbClient: DBClient, userID: number): Promise<Result<void, Error>>;
 }
