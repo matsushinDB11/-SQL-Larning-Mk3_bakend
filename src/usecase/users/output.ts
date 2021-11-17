@@ -3,6 +3,7 @@ import { user as userDomain } from "../../domain/users";
 export type user = {
     ID: number;
     email: string;
+    isAdmin: boolean;
 };
 
 export type ListOutput = {
@@ -13,6 +14,7 @@ export function convertGetOutput(input: userDomain): user {
     return {
         ID: input.ID,
         email: input.email,
+        isAdmin: input.isAdmin,
     };
 }
 

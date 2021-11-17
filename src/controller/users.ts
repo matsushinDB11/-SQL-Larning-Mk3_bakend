@@ -45,8 +45,10 @@ export class usersController {
     }
     Add(req: express.Request, res: express.Response) {
         const email: string = req.body.email;
+        const isAdmin: boolean | undefined = req.body.isAdmin;
         const input: AddInput = {
             email: email,
+            isAdmin: isAdmin,
         };
         this.interactor
             .Add(input)
@@ -64,9 +66,11 @@ export class usersController {
     Update = (req: express.Request, res: express.Response) => {
         const stringId = req.params.id;
         const email: string = req.body.email;
+        const isAdmin: boolean | undefined = req.body.isAdmin;
         const input: UpdateInput = {
             userID: Number(stringId),
             email: email,
+            isAdmin: isAdmin,
         };
         this.interactor
             .Update(input)

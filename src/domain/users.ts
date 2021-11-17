@@ -7,7 +7,7 @@ export interface Repository {
     Add(
         dbClient: DBClient,
         email: string,
-        isAdmin: boolean
+        isAdmin: boolean | undefined
     ): Promise<Result<void, Error>>;
     Update(
         dbClient: DBClient,
@@ -21,4 +21,5 @@ export interface Repository {
 export type user = {
     ID: number;
     email: string;
+    isAdmin: boolean;
 };

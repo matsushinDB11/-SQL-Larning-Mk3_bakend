@@ -15,6 +15,7 @@ export class usersInfra implements Repository {
             resData.push({
                 ID: data.id,
                 email: data.email,
+                isAdmin: data.isAdmin,
             });
         });
         return resData;
@@ -38,6 +39,7 @@ export class usersInfra implements Repository {
             const resData: userDomain = {
                 ID: rowData.id,
                 email: rowData.email,
+                isAdmin: rowData.isAdmin,
             };
             return new Success(resData);
         }
