@@ -8,10 +8,10 @@ import { DBClient } from "../../domain/DBClient";
 import { Repository } from "../../domain/users";
 import { getList, get, add, update, del } from "./logic";
 import { AddInput, DeleteInput, GetInput, UpdateInput } from "./input";
-import { Failure, Result, Success } from "../../errorHelper/resultType";
+import { Failure, Result, Success } from "../../errorTypes/resultType";
 
 export type Interactor = {
-    GetList(): Promise<Result<ListOutput, Error>>;
+    GetList(): Promise<ListOutput>;
     Get(input: GetInput): Promise<Result<user, Error>>;
     Add(input: AddInput): Promise<Result<void, Error>>;
     Update(input: UpdateInput): Promise<Result<void, Error>>;
@@ -25,13 +25,9 @@ export class usersUsecase implements Interactor {
         this.repository = repository;
         this.dbClient = dbClient;
     }
-    async GetList(): Promise<Result<ListOutput, Error>> {
+    async GetList(): Promise<ListOutput> {
         const data = await getList(this.dbClient, this.repository);
-        if (data.isFailure()) {
-            return new Failure(data.value);
-        } else {
-            return new Success(convertListOutput(data.value));
-        }
+        return convertListOutput(data);
     }
     async Get(input: GetInput): Promise<Result<user, Error>> {
         const data = await get(this.dbClient, this.repository, input);
