@@ -3,14 +3,14 @@ export type GetInput = {
 };
 
 export type AddInput = {
-    name: string;
     email: string;
+    isAdmin: boolean | undefined;
 };
 
 export type UpdateInput = {
     userID: number;
-    name: string | undefined;
-    email: string | undefined;
+    email: string;
+    isAdmin: boolean | undefined;
 };
 
 export type DeleteInput = {

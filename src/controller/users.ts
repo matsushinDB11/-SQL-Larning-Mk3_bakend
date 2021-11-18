@@ -19,10 +19,14 @@ export class usersController {
         this.interactor
             .GetList()
             .then((data) => {
-                res.status(200).json(data);
+                if (data.isFailure()) {
+                    res.status(ErrorToHttpStatus(data.value)).json(data.value);
+                } else {
+                    res.status(http.StatusOK()).json(data.value);
+                }
             })
             .catch(() => {
-                res.status(500).send();
+                res.status(http.StatusInternalServerError()).send();
             });
     }
     Get(req: express.Request, res: express.Response) {
@@ -40,15 +44,15 @@ export class usersController {
                 }
             })
             .catch(() => {
-                res.status(500).send();
+                res.status(http.StatusInternalServerError()).send();
             });
     }
     Add(req: express.Request, res: express.Response) {
-        const name: string = req.body.name;
         const email: string = req.body.email;
+        const isAdmin: boolean | undefined = req.body.isAdmin;
         const input: AddInput = {
-            name: name,
             email: email,
+            isAdmin: isAdmin,
         };
         this.interactor
             .Add(input)
@@ -60,17 +64,17 @@ export class usersController {
                 }
             })
             .catch(() => {
-                res.status(500).send();
+                res.status(http.StatusInternalServerError()).send();
             });
     }
     Update = (req: express.Request, res: express.Response) => {
         const stringId = req.params.id;
         const email: string = req.body.email;
-        const name: string = req.body.name;
+        const isAdmin: boolean | undefined = req.body.isAdmin;
         const input: UpdateInput = {
             userID: Number(stringId),
             email: email,
-            name: name,
+            isAdmin: isAdmin,
         };
         this.interactor
             .Update(input)
@@ -82,7 +86,7 @@ export class usersController {
                 }
             })
             .catch(() => {
-                res.status(500).send();
+                res.status(http.StatusInternalServerError()).send();
             });
     };
     Delete = (req: express.Request, res: express.Response) => {
@@ -100,7 +104,7 @@ export class usersController {
                 }
             })
             .catch(() => {
-                res.status(500).send();
+                res.status(http.StatusInternalServerError()).send();
             });
     };
 }

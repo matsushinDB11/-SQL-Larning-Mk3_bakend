@@ -1,13 +1,18 @@
 import { Repository, user as userDomain } from "../../domain/users";
 import { DBClient } from "../../domain/DBClient";
 import { AddInput, DeleteInput, GetInput, UpdateInput } from "./input";
-import { Failure, Result, Success } from "../../errorTypes/resultType";
+import { Failure, Result, Success } from "../../errorHelper/resultType";
 
 export async function getList(
     dbClient: DBClient,
     userRepo: Repository
-): Promise<userDomain[]> {
-    return await userRepo.GetList(dbClient);
+): Promise<Result<userDomain[], Error>> {
+    const data = await userRepo.GetList(dbClient);
+    if (data.isFailure()) {
+        return new Failure(data.value);
+    } else {
+        return new Success(data.value);
+    }
 }
 
 export async function get(
@@ -28,7 +33,7 @@ export async function add(
     userRepo: Repository,
     input: AddInput
 ): Promise<Result<void, Error>> {
-    const res = await userRepo.Add(dbClient, input.email, input.name);
+    const res = await userRepo.Add(dbClient, input.email, input.isAdmin);
     if (res.isFailure()) {
         return new Failure(res.value);
     } else {
@@ -45,7 +50,7 @@ export async function update(
         dbClient,
         input.userID,
         input.email,
-        input.name
+        input.isAdmin
     );
     if (res.isFailure()) {
         return new Failure(res.value);

@@ -1,19 +1,19 @@
 import { DBClient } from "./DBClient";
-import { Result } from "../errorTypes/resultType";
+import { Result } from "../errorHelper/resultType";
 
 export interface Repository {
-    GetList(dbClient: DBClient): Promise<user[]>;
+    GetList(dbClient: DBClient): Promise<Result<user[], Error>>;
     Get(dbClient: DBClient, userID: number): Promise<Result<user, Error>>;
     Add(
         dbClient: DBClient,
         email: string,
-        name: string
+        isAdmin: boolean | undefined
     ): Promise<Result<void, Error>>;
     Update(
         dbClient: DBClient,
         userID: number,
-        email: string | undefined,
-        name: string | undefined
+        email: string,
+        isAdmin: boolean | undefined
     ): Promise<Result<void, Error>>;
     Delete(dbClient: DBClient, userID: number): Promise<Result<void, Error>>;
 }
@@ -21,5 +21,5 @@ export interface Repository {
 export type user = {
     ID: number;
     email: string;
-    name: string | null;
+    isAdmin: boolean;
 };
