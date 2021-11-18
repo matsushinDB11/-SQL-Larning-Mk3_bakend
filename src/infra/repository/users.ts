@@ -1,4 +1,4 @@
-import { Repository, user as userDomain } from "../../domain/users";
+import { Repository, user, user as userDomain } from "../../domain/users";
 import { Failure, Result, Success } from "../../errorHelper/resultType";
 import {
     DBInternalError,
@@ -118,5 +118,32 @@ export class usersInfra implements Repository {
             return new Failure(errorType);
         }
         return new Success(undefined);
+    };
+
+    GetByEmail = async (
+        dbClient: DBClient,
+        email: string
+    ): Promise<Result<user, Error>> => {
+        try {
+            const rowData = await dbClient.ConnectDB().user.findUnique({
+                where: {
+                    email: email,
+                },
+            });
+            if (rowData == null) {
+                return new Failure(
+                    new resourceNotFoundError("email: " + String(email))
+                );
+            } else {
+                const resData: userDomain = {
+                    ID: rowData.id,
+                    email: rowData.email,
+                    isAdmin: rowData.isAdmin,
+                };
+                return new Success(resData);
+            }
+        } catch (e) {
+            return new Failure(new DBInternalError("GetUserByEmail"));
+        }
     };
 }
