@@ -11,9 +11,9 @@ export class resourceNotFoundError extends Error {
 export class DBInternalError extends Error {
     message: string;
     name: string;
-    constructor(operation: string) {
+    constructor(resource: string) {
         super();
-        this.message = operation;
+        this.message = resource;
         this.name = "DBInternalError";
     }
 }

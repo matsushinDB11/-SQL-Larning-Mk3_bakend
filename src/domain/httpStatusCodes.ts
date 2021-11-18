@@ -29,7 +29,7 @@ export default class HttpStatusCodes {
     StatusNotFound(): number {
         return this.NotFound;
     }
-    StatusInternalServerError(): number {
+    StatusStatusInternalServerError(): number {
         return this.InternalServerError;
     }
 }

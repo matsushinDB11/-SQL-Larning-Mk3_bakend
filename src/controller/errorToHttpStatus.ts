@@ -1,4 +1,4 @@
-import { resourceNotFoundError } from "../errorHelper/errors";
+import { resourceNotFoundError } from "../errorTypes/errors";
 import HttpStatusCodes from "../domain/httpStatusCodes";
 
 const http = new HttpStatusCodes();
@@ -8,6 +8,6 @@ export default function ErrorToHttpStatus(error: Error): number {
         case error instanceof resourceNotFoundError:
             return http.StatusNotFound();
         default:
-            return http.StatusInternalServerError();
+            return http.StatusStatusInternalServerError();
     }
 }
