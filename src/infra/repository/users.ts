@@ -1,59 +1,73 @@
 import { Repository, user as userDomain } from "../../domain/users";
-import { Failure, Result, Success } from "../../errorTypes/resultType";
+import { Failure, Result, Success } from "../../errorHelper/resultType";
 import {
     DBInternalError,
     resourceNotFoundError,
-} from "../../errorTypes/errors";
+} from "../../errorHelper/errors";
 import { DBClient } from "../../domain/DBClient";
 import { PrismaInfra } from "./PrismaInfra";
+import { convertPrismaError } from "../../errorHelper/helperFunc";
 
 export class usersInfra implements Repository {
-    GetList = async (dbClient: PrismaInfra): Promise<userDomain[]> => {
-        const rowData = await dbClient.ConnectDB().user.findMany();
-        const resData: userDomain[] = [];
-        rowData.forEach((data) => {
-            resData.push({
-                ID: data.id,
-                email: data.email,
-                name: data.name,
-            });
-        });
-        return resData;
+    GetList = async (
+        dbClient: PrismaInfra
+    ): Promise<Result<userDomain[], Error>> => {
+        try {
+            const rowData = await dbClient.ConnectDB().user.findMany();
+            if (rowData == []) {
+                return new Failure(new resourceNotFoundError("Get User List"));
+            } else {
+                const resData: userDomain[] = [];
+                rowData.forEach((data) => {
+                    resData.push({
+                        ID: data.id,
+                        email: data.email,
+                        isAdmin: data.isAdmin,
+                    });
+                });
+                return new Success(resData);
+            }
+        } catch (e) {
+            return new Failure(new DBInternalError("Get User List"));
+        }
     };
 
     Get = async (
         dbClient: DBClient,
         userID: number
     ): Promise<Result<userDomain, Error>> => {
-        const rowData = await dbClient.ConnectDB().user.findUnique({
-            where: {
-                id: userID,
-            },
-        });
-        if (rowData == null) {
-            return new Failure(
-                new resourceNotFoundError("memoID: " + String(userID))
-            );
-        } else {
-            // return new Success(rowData);
-            const resData: userDomain = {
-                ID: rowData.id,
-                email: rowData.email,
-                name: rowData.name,
-            };
-            return new Success(resData);
+        try {
+            const rowData = await dbClient.ConnectDB().user.findUnique({
+                where: {
+                    id: userID,
+                },
+            });
+            if (rowData == null) {
+                return new Failure(
+                    new resourceNotFoundError("memoID: " + String(userID))
+                );
+            } else {
+                const resData: userDomain = {
+                    ID: rowData.id,
+                    email: rowData.email,
+                    isAdmin: rowData.isAdmin,
+                };
+                return new Success(resData);
+            }
+        } catch (e) {
+            return new Failure(new DBInternalError("GetUser"));
         }
     };
     Add = async (
         dbClient: DBClient,
         email: string,
-        name: string
+        isAdmin: boolean | undefined
     ): Promise<Result<void, Error>> => {
         try {
             await dbClient.ConnectDB().user.create({
                 data: {
                     email: email,
-                    name: name,
+                    isAdmin: isAdmin,
                 },
             });
         } catch (e) {
@@ -65,19 +79,24 @@ export class usersInfra implements Repository {
     Update = async (
         dbClient: DBClient,
         userID: number,
-        email: string | undefined,
-        name: string | undefined
+        email: string,
+        isAdmin: boolean | undefined
     ): Promise<Result<void, Error>> => {
         try {
             await dbClient.ConnectDB().user.update({
                 where: { id: userID },
                 data: {
                     email: email,
-                    name: name,
+                    isAdmin: isAdmin,
                 },
             });
         } catch (e) {
-            return new Failure(new DBInternalError("Update User Fail"));
+            const errorType = convertPrismaError(
+                e,
+                "userID: " + String(userID),
+                "Update User"
+            );
+            return new Failure(errorType);
         }
         return new Success(undefined);
     };
@@ -91,7 +110,12 @@ export class usersInfra implements Repository {
                 where: { id: userID },
             });
         } catch (e) {
-            return new Failure(new DBInternalError("Delete User Fail"));
+            const errorType = convertPrismaError(
+                e,
+                "userID: " + String(userID),
+                "Delete User"
+            );
+            return new Failure(errorType);
         }
         return new Success(undefined);
     };
