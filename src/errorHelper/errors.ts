@@ -17,3 +17,13 @@ export class DBInternalError extends Error {
         this.name = "DBInternalError";
     }
 }
+
+export class InternalServerError extends Error {
+    message: string;
+    name: string;
+    constructor(operation: string) {
+        super();
+        this.message = operation;
+        this.name = "InternalServerError";
+    }
+}
