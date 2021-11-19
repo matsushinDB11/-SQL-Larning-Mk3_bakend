@@ -1,6 +1,12 @@
-import { Repository, verifyOutPut } from "../../domain/authenticator";
+import {
+    jwt as jwtOutput,
+    jwtPayload,
+    Repository,
+    verifyOutPut,
+} from "../../domain/authenticator";
 import { Failure, Result, Success } from "../../errorHelper/resultType";
 import { OAuth2Client } from "google-auth-library";
+import * as jwt from "jsonwebtoken";
 import keys = require("../../GoogleAuth/apps.googleusercontent.com.json");
 import {
     InternalServerError,
@@ -37,6 +43,24 @@ export class AuthenticatorInfra implements Repository {
             return new Failure(
                 new InternalServerError("verify Google id_token")
             );
+        }
+    };
+    GenerateJwt = async (
+        userID: string,
+        isAdmin: boolean
+    ): Promise<Result<jwtOutput, Error>> => {
+        const payload: jwtPayload = {
+            email: userID,
+            isAdmin: isAdmin,
+        };
+        try {
+            const jwtSecret = String(process.env.JWT_SECRET);
+            const token: jwtOutput = {
+                token: jwt.sign(payload, jwtSecret),
+            };
+            return new Success(token);
+        } catch (e) {
+            return new Failure(new InternalServerError("create jwt"));
         }
     };
 }
