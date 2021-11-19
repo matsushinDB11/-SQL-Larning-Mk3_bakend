@@ -6,5 +6,5 @@ export interface Repository {
 
 export type verifyOutPut = {
     result: boolean;
-    userID: string | null;
+    userID: string;
 };

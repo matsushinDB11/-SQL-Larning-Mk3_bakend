@@ -2,7 +2,10 @@ import { Repository, verifyOutPut } from "../../domain/authenticator";
 import { Failure, Result, Success } from "../../errorHelper/resultType";
 import { OAuth2Client } from "google-auth-library";
 import keys = require("../../GoogleAuth/apps.googleusercontent.com.json");
-import { InternalServerError } from "../../errorHelper/errors";
+import {
+    InternalServerError,
+    resourceNotFoundError,
+} from "../../errorHelper/errors";
 
 export class AuthenticatorInfra implements Repository {
     VerifyGoogleIdToken = async (
@@ -18,9 +21,15 @@ export class AuthenticatorInfra implements Repository {
                 idToken: id_token,
                 audience: keys.web.client_id,
             });
+            const userEmail = ticket.getUserId();
+            if (userEmail == null) {
+                return new Failure(
+                    new resourceNotFoundError("id_token: " + id_token)
+                );
+            }
             const res = {
                 result: true,
-                userID: ticket.getUserId(),
+                userID: userEmail,
             };
             return new Success(res);
         } catch (e) {
