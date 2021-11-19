@@ -20,17 +20,17 @@
     "eslint-config-prettier": "8.3.0",
     "husky": ">=6",
     "lint-staged": ">=10",
+    "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
     "prettier": "2.4.1",
     "prisma": "^3.3.0",
     "rimraf": "^3.0.2",
     "swagger-jsdoc": "^6.1.0",
     "ts-node": "^10.2.1",
-    "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn src/**.ts",
+    "dev": "nodemon",
     "clean": "rimraf dist",
     "tsc": "tsc",
     "build": "npm-run-all clean tsc",
@@ -44,7 +44,6 @@
     "seed": "ts-node --require dotenv/config prisma/seed.ts"
   },
   "lint-staged": {
-    "*.{ts,js}": "eslint --cache --fix",
     "*.{ts,js}": "prettier --write"
   }
 }

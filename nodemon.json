@@ -1,0 +1,17 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/**",
+    "/*.test.ts"
+  ],
+  "env": {
+    "NODE_ENV": "dev"
+  },
+  "watch": [
+    "src/"
+  ],
+  "verbose": true,
+  "ext": "js, ts, json",
+  "exec": "ts-node ./src/index.ts"
+}
