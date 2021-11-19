@@ -1,6 +1,6 @@
 import { Result } from "../errorHelper/resultType";
 
-export interface Authenticator {
+export interface Repository {
     VerifyGoogleIdToken(id_token: string): Promise<Result<verifyOutPut, Error>>;
 }
 
