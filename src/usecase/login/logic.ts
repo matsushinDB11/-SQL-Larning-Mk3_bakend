@@ -1,7 +1,7 @@
-import { Repository as authRepository } from "../../domain/authenticator";
+import { jwt, Repository as authRepository } from "../../domain/authenticator";
 import { Repository as userRepository } from "../../domain/users";
 import { LoginInput } from "./input";
-import { Failure } from "../../errorHelper/resultType";
+import { Failure, Result, Success } from "../../errorHelper/resultType";
 import { DBClient } from "../../domain/DBClient";
 
 export const login = async (
@@ -9,7 +9,7 @@ export const login = async (
     authRepo: authRepository,
     userRepo: userRepository,
     input: LoginInput
-) => {
+): Promise<Result<jwt, Error>> => {
     const resVerifyIdToken = await authRepo.VerifyGoogleIdToken(
         input.googleIdToken
     );
@@ -22,6 +22,9 @@ export const login = async (
         return new Failure(resGetUser.value);
     }
     const isAdmin = resGetUser.value.isAdmin;
-    if (isAdmin) {
+    const resJwtToken = await authRepo.GenerateJwt(userEmail, isAdmin);
+    if (resJwtToken.isFailure()) {
+        return new Failure(resJwtToken.value);
     }
+    return new Success(resJwtToken.value);
 };
