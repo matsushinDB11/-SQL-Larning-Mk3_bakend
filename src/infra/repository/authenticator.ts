@@ -13,7 +13,7 @@ import {
     resourceNotFoundError,
 } from "../../errorHelper/errors";
 
-export class AuthenticatorInfra implements Repository {
+export default class AuthenticatorInfra implements Repository {
     VerifyGoogleIdToken = async (
         id_token: string
     ): Promise<Result<verifyOutPut, Error>> => {

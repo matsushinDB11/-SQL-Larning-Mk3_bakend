@@ -8,7 +8,7 @@ import { DBClient } from "../../domain/DBClient";
 import { PrismaInfra } from "./PrismaInfra";
 import { convertPrismaError } from "../../errorHelper/helperFunc";
 
-export class usersInfra implements Repository {
+export default class usersInfra implements Repository {
     GetList = async (
         dbClient: PrismaInfra
     ): Promise<Result<userDomain[], Error>> => {
