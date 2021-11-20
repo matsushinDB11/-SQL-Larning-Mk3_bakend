@@ -16,14 +16,19 @@ export class loginController {
         const input: LoginInput = {
             googleIdToken: id_token,
         };
-        this.interacotr.Login(input).then((data) => {
-            if (data.isFailure()) {
-                const errorStatus = ErrorToHttpStatus(data.value);
-                res.status(errorStatus).json(data.value);
-            } else {
-                const jwt = data.value.token;
-                res.status(http.StatusOK()).json({ jwt });
-            }
-        });
+        this.interacotr
+            .Login(input)
+            .then((data) => {
+                if (data.isFailure()) {
+                    const errorStatus = ErrorToHttpStatus(data.value);
+                    res.status(errorStatus).json(data.value);
+                } else {
+                    const jwt = data.value.token;
+                    res.status(http.StatusOK()).json({ jwt });
+                }
+            })
+            .catch(() => {
+                res.status(http.StatusInternalServerError()).send();
+            });
     }
 }
