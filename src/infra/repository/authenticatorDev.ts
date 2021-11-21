@@ -1,7 +1,13 @@
-import { jwt, Repository, verifyOutPut } from "../../domain/authenticator";
+import {
+    jwtOutput,
+    jwtPayload,
+    Repository,
+    verifyOutPut,
+} from "../../domain/authenticator";
 import { Failure, Result, Success } from "../../errorHelper/resultType";
 import axios, { AxiosResponse } from "axios";
 import { InternalServerError } from "../../errorHelper/errors";
+import * as jwt from "jsonwebtoken";
 
 // 開発環境用Authenticator
 export default class DevAuthenticatorInfra implements Repository {
@@ -40,7 +46,19 @@ export default class DevAuthenticatorInfra implements Repository {
     };
 
     // 開発環境用なので jwt の secret をハードコーディングしている
-    GenerateJwt(userID: string, isAdmin: boolean): Promise<Result<jwt, Error>> {
-        return Promise.resolve(undefined);
+    GenerateJwt(userID: string, isAdmin: boolean): Result<jwtOutput, Error> {
+        const payload: jwtPayload = {
+            email: userID,
+            isAdmin: isAdmin,
+        };
+        try {
+            const token: jwtOutput = {
+                token: jwt.sign(payload, "devJwtSecret"),
+            };
+            return new Success(token);
+        } catch (e) {
+            console.error(e);
+            return new Failure(new InternalServerError("create jwt"));
+        }
     }
 }
