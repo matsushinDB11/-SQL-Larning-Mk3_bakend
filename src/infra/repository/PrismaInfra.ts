@@ -1,7 +1,7 @@
 import { DBClient } from "../../domain/DBClient";
 import { PrismaClient } from "@prisma/client";
 
-export class PrismaInfra implements DBClient {
+export default class PrismaInfra implements DBClient {
     private Prisma: PrismaClient | undefined;
     private isTransactionValid: boolean;
     constructor() {

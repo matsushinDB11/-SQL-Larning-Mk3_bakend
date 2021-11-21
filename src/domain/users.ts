@@ -4,6 +4,7 @@ import { Result } from "../errorHelper/resultType";
 export interface Repository {
     GetList(dbClient: DBClient): Promise<Result<user[], Error>>;
     Get(dbClient: DBClient, userID: number): Promise<Result<user, Error>>;
+    GetByEmail(dbClient: DBClient, email: string): Promise<Result<user, Error>>;
     Add(
         dbClient: DBClient,
         email: string,
