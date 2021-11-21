@@ -24,7 +24,9 @@ export class loginController {
                     res.status(errorStatus).json(data.value);
                 } else {
                     const jwt = data.value.token;
-                    res.status(http.StatusOK()).json({ jwt });
+                    res.status(http.StatusCreated())
+                        .cookie("token", jwt, { httpOnly: true })
+                        .send();
                 }
             })
             .catch(() => {
