@@ -11,8 +11,8 @@
       "description": "ユーザー関連"
     },
     {
-      "name": "employees",
-      "description": "従業員情報"
+      "name": "Auth",
+      "description": "認証"
     }
   ],
   "apis": [
@@ -20,6 +20,29 @@
   ],
   "swagger": "2.0",
   "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "ログイン",
+        "description": "Login & Get jwt",
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "Set-Cookie": {
+                "description": "Access token by jwt",
+                "schema": {
+                  "type": "string",
+                  "example": "token=hogehoge;"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users": {
       "get": {
         "tags": [
@@ -27,7 +50,7 @@
         ],
         "summary": "ユーザー一覧取得",
         "description": "Get users list.",
-        "response": {
+        "responses": {
           "200": {
             "description": "Success",
             "content": "application/json"
@@ -79,14 +102,16 @@
             }
           }
         },
-        "response": {
+        "responses": {
           "201": {
             "description": "Success"
           },
           "400": {
             "description": "Bad request"
           },
-          "500": "Internal Server Error"
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       }
     },
@@ -108,7 +133,7 @@
             }
           }
         ],
-        "response": {
+        "responses": {
           "200": {
             "description": "Success",
             "content": "application/json"
@@ -136,7 +161,7 @@
         ],
         "summary": "ユーザ情報修正",
         "description": "Update User",
-        "response": null
+        "responses": null
       }
     }
   },

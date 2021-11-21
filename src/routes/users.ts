@@ -15,7 +15,7 @@ export default function usersRouter(s: Service): express.Router {
      *      tags: [User]
      *      summary: ユーザー一覧取得
      *      description: Get users list.
-     *      response:
+     *      responses:
      *       200:
      *        description: Success
      *        content: application/json
@@ -39,7 +39,7 @@ export default function usersRouter(s: Service): express.Router {
      *      required: true
      *      schema:
      *        type: number
-     *    response:
+     *    responses:
      *      200:
      *        description: Success
      *        content: application/json
@@ -85,13 +85,13 @@ export default function usersRouter(s: Service): express.Router {
      *                  type: string
      *                email:
      *                  type: string
-     *      response:
+     *      responses:
      *       201:
      *        description: Success
      *       400:
      *        description: Bad request
      *       500:
-     *        Internal Server Error
+     *        description: Internal Server Error
      */
     // ユーザー情報修正
     router.put("/:id", (req: express.Request, res: express.Response) => {
@@ -106,7 +106,7 @@ export default function usersRouter(s: Service): express.Router {
      *    summary: ユーザ情報修正
      *    description: Update User
      *
-     *    response:
+     *    responses:
      *    201:
      *      description: Success
      *    400:

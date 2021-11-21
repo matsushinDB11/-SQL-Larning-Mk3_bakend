@@ -6,6 +6,24 @@ const loginRouter = (s: Service): Router => {
     router.post("/", (req: Request, res: Response) => {
         s.login.Login(req, res);
     });
+    /**
+     * @swagger
+     * /login:
+     *  post:
+     *      tags:
+     *      - Auth
+     *      summary: ログイン
+     *      description: Login & Get jwt
+     *      responses:
+     *          201:
+     *              description: Success
+     *              headers:
+     *                  Set-Cookie:
+     *                      description: Access token by jwt
+     *                      schema:
+     *                          type: string
+     *                          example: token=hogehoge;
+     */
     return router;
 };
 
