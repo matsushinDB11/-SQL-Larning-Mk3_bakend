@@ -19,7 +19,10 @@ module.exports = {
     "plugins": [
         "@typescript-eslint"
     ],
-    "ignorePatterns": ["**/.eslintrc.js"],
+    "ignorePatterns": [
+        "**/.eslintrc.js",
+        "jest.config.js"
+    ],
     "rules": {
     }
 };
