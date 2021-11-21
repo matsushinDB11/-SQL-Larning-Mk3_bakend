@@ -22,7 +22,7 @@ export const login = async (
         return new Failure(resGetUser.value);
     }
     const isAdmin = resGetUser.value.isAdmin;
-    const resJwtToken = await authRepo.GenerateJwt(userEmail, isAdmin);
+    const resJwtToken = authRepo.GenerateJwt(userEmail, isAdmin);
     if (resJwtToken.isFailure()) {
         return new Failure(resJwtToken.value);
     }

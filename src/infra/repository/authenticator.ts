@@ -33,8 +33,7 @@ export default class AuthenticatorInfra implements Repository {
                     new resourceNotFoundError("id_token: " + id_token)
                 );
             }
-            const res = {
-                result: true,
+            const res: verifyOutPut = {
                 userID: userEmail,
             };
             return new Success(res);
@@ -45,10 +44,10 @@ export default class AuthenticatorInfra implements Repository {
             );
         }
     };
-    GenerateJwt = async (
+    GenerateJwt = (
         userID: string,
         isAdmin: boolean
-    ): Promise<Result<jwtOutput, Error>> => {
+    ): Result<jwtOutput, Error> => {
         const payload: jwtPayload = {
             email: userID,
             isAdmin: isAdmin,
