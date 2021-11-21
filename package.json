@@ -50,6 +50,9 @@
     "seed": "ts-node --require dotenv/config prisma/seed.ts"
   },
   "lint-staged": {
-    "*.{ts,js}": "prettier --write"
+    "*.{ts,js}": [
+      "prettier --write",
+      "eslint --cache --fix"
+    ]
   }
 }
