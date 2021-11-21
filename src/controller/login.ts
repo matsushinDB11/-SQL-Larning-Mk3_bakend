@@ -1,8 +1,9 @@
 import { Interactor } from "../usecase/login/endpoint";
-import { Request, Response } from "express";
+import { Response } from "express";
 import { LoginInput } from "../usecase/login/input";
 import ErrorToHttpStatus from "./errorToHttpStatus";
 import HttpStatusCodes from "../domain/httpStatusCodes";
+import { RequestBodyType } from "./controllerInterface";
 
 const http = new HttpStatusCodes();
 
@@ -11,10 +12,10 @@ export class loginController {
     constructor(interactor: Interactor) {
         this.interacotr = interactor;
     }
-    Login(req: Request, res: Response) {
+    Login(req: RequestBodyType<LoginInput>, res: Response) {
         const id_token: string = req.body.id_token;
         const input: LoginInput = {
-            googleIdToken: id_token,
+            id_token: id_token,
         };
         this.interacotr
             .Login(input)

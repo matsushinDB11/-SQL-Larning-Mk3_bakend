@@ -1,5 +1,5 @@
 import { Interactor } from "../usecase/users/endpoint";
-import express from "express";
+import express, { Request } from "express";
 import {
     AddInput,
     DeleteInput,
@@ -8,6 +8,7 @@ import {
 } from "../usecase/users/input";
 import HttpStatusCodes from "../domain/httpStatusCodes";
 import ErrorToHttpStatus from "./errorToHttpStatus";
+import { RequestBodyType } from "./controllerInterface";
 const http = new HttpStatusCodes();
 
 export class usersController {
@@ -15,7 +16,7 @@ export class usersController {
     constructor(interactor: Interactor) {
         this.interactor = interactor;
     }
-    GetList(req: express.Request, res: express.Response) {
+    GetList(req: Request, res: express.Response) {
         this.interactor
             .GetList()
             .then((data) => {
@@ -47,7 +48,7 @@ export class usersController {
                 res.status(http.StatusInternalServerError()).send();
             });
     }
-    Add(req: express.Request, res: express.Response) {
+    Add(req: RequestBodyType<AddInput>, res: express.Response) {
         const email: string = req.body.email;
         const isAdmin: boolean | undefined = req.body.isAdmin;
         const input: AddInput = {
@@ -67,7 +68,7 @@ export class usersController {
                 res.status(http.StatusInternalServerError()).send();
             });
     }
-    Update = (req: express.Request, res: express.Response) => {
+    Update = (req: RequestBodyType<UpdateInput>, res: express.Response) => {
         const stringId = req.params.id;
         const email: string = req.body.email;
         const isAdmin: boolean | undefined = req.body.isAdmin;
