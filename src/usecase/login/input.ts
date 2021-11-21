@@ -1,3 +1,3 @@
 export type LoginInput = {
-    googleIdToken: string;
+    id_token: string;
 };
