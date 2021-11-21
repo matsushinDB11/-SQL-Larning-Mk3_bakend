@@ -1,6 +1,6 @@
 import { jwt, Repository, verifyOutPut } from "../../domain/authenticator";
 import { Failure, Result, Success } from "../../errorHelper/resultType";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { InternalServerError } from "../../errorHelper/errors";
 
 // 開発環境用Authenticator
@@ -9,13 +9,22 @@ export default class DevAuthenticatorInfra implements Repository {
     VerifyGoogleIdToken = async (
         id_token: string
     ): Promise<Result<verifyOutPut, Error>> => {
+        type verifyResType = {
+            email: string;
+        };
+        interface customAxiosRes<T> extends AxiosResponse {
+            data: T;
+        }
         const endpoint = "https://oauth2.googleapis.com/tokeninfo";
         try {
-            const verifyRes = await axios.post(endpoint, {
-                params: {
-                    id_token: id_token,
-                },
-            });
+            const verifyRes: customAxiosRes<verifyResType> = await axios.post(
+                endpoint,
+                {
+                    params: {
+                        id_token: id_token,
+                    },
+                }
+            );
             const userEmail = verifyRes.data.email;
             const res: verifyOutPut = {
                 userID: userEmail,
