@@ -13,9 +13,7 @@ export const login = async (
     userRepo: userRepository,
     input: LoginInput
 ): Promise<Result<jwtOutput, Error>> => {
-    const resVerifyIdToken = await authRepo.VerifyGoogleIdToken(
-        input.googleIdToken
-    );
+    const resVerifyIdToken = await authRepo.VerifyGoogleIdToken(input.id_token);
     if (resVerifyIdToken.isFailure()) {
         return new Failure(resVerifyIdToken.value);
     }
