@@ -1,4 +1,7 @@
-import { jwt, Repository as authRepository } from "../../domain/authenticator";
+import {
+    jwtOutput,
+    Repository as authRepository,
+} from "../../domain/authenticator";
 import { Repository as userRepository } from "../../domain/users";
 import { LoginInput } from "./input";
 import { Failure, Result, Success } from "../../errorHelper/resultType";
@@ -9,7 +12,7 @@ export const login = async (
     authRepo: authRepository,
     userRepo: userRepository,
     input: LoginInput
-): Promise<Result<jwt, Error>> => {
+): Promise<Result<jwtOutput, Error>> => {
     const resVerifyIdToken = await authRepo.VerifyGoogleIdToken(
         input.googleIdToken
     );

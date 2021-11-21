@@ -1,5 +1,5 @@
 import {
-    jwt as jwtOutput,
+    jwtOutput,
     jwtPayload,
     Repository,
     verifyOutPut,

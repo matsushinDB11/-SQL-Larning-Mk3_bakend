@@ -1,4 +1,4 @@
-import { jwt as jwtDomain } from "../../domain/authenticator";
+import { jwtOutput as jwtDomain } from "../../domain/authenticator";
 
 export type jwt = {
     token: string;
