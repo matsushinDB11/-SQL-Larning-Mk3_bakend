@@ -23,7 +23,7 @@ export default class DevAuthenticatorInfra implements Repository {
         }
         const endpoint = "https://oauth2.googleapis.com/tokeninfo";
         try {
-            const verifyRes: customAxiosRes<verifyResType> = await axios.post(
+            const verifyRes: customAxiosRes<verifyResType> = await axios.get(
                 endpoint,
                 {
                     params: {
