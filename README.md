@@ -44,5 +44,8 @@ In the project directory, you can run:
 各種lint tool を`src/`以下のソースファイル走らせる。
 これらはlint-stagedによって`git commit`時にステージングされているソースファイルに対して自動で走る。
 
+### `yarn jest`
+`*test.ts`に記述したテストを実行
+
 ### `yarn build`
 Jsにトランスパイルして`dist/`以下に出力。
