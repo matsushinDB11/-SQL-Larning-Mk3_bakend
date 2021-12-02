@@ -19,6 +19,10 @@ export default function usersRouter(s: Service): express.Router {
      *       200:
      *        description: Success
      *        content: application/json
+     *        schema:
+     *          type: array
+     *          items:
+     *              $ref: "#/definitions/User"
      */
 
     // Get 詳細取得
@@ -43,6 +47,8 @@ export default function usersRouter(s: Service): express.Router {
      *      200:
      *        description: Success
      *        content: application/json
+     *        schema:
+     *          $ref: "#/definitions/User"
      *      400:
      *        description: Resource not found error
      *        content: application/json
@@ -75,16 +81,6 @@ export default function usersRouter(s: Service): express.Router {
      *           email:
      *            type: string
      *
-     *      requestBody:
-     *        content:
-     *          'application/json':
-     *            schema:
-     *              type: object
-     *              properties:
-     *                name:
-     *                  type: string
-     *                email:
-     *                  type: string
      *      responses:
      *       201:
      *        description: Success
@@ -105,6 +101,15 @@ export default function usersRouter(s: Service): express.Router {
      *    - User
      *    summary: ユーザ情報修正
      *    description: Update User
+     *    consumes:
+     *     - application/json
+     *    parameters:
+     *    - in: body
+     *      name: body
+     *      description: User Object
+     *      required: true
+     *      schema:
+     *        $ref: "#/definitions/User"
      *
      *    responses:
      *    201:
@@ -120,3 +125,17 @@ export default function usersRouter(s: Service): express.Router {
     });
     return router;
 }
+
+/**
+ * @swagger
+ * definitions:
+ *  User:
+ *      type: "object"
+ *      properties:
+ *          id:
+ *              type: integer
+ *          email:
+ *              type: string
+ *          is_Admin:
+ *              type: boolean
+ */

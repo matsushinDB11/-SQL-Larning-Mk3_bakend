@@ -27,6 +27,26 @@
         ],
         "summary": "ログイン",
         "description": "Login & Get jwt",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Google auth id_token",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_token": {
+                  "type": "string",
+                  "description": "Google認証のid_token"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Success",
@@ -53,7 +73,13 @@
         "responses": {
           "200": {
             "description": "Success",
-            "content": "application/json"
+            "content": "application/json",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
           }
         }
       },
@@ -85,23 +111,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "201": {
             "description": "Success"
@@ -136,7 +145,10 @@
         "responses": {
           "200": {
             "description": "Success",
-            "content": "application/json"
+            "content": "application/json",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           },
           "400": {
             "description": "Resource not found error",
@@ -161,11 +173,40 @@
         ],
         "summary": "ユーザ情報修正",
         "description": "Update User",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User Object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
         "responses": null
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        },
+        "is_Admin": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
   "responses": {},
   "parameters": {},
   "securityDefinitions": {}

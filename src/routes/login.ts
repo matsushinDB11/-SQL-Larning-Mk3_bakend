@@ -14,6 +14,19 @@ const loginRouter = (s: Service): Router => {
      *      - Auth
      *      summary: ログイン
      *      description: Login & Get jwt
+     *      consumes:
+     *       - application/json
+     *      parameters:
+     *      -   in: body
+     *          name: body
+     *          description: Google auth id_token
+     *          required: true
+     *          schema:
+     *             type: object
+     *             properties:
+     *              id_token:
+     *                   type: string
+     *                   description: Google認証のid_token
      *      responses:
      *          201:
      *              description: Success
