@@ -1,7 +1,7 @@
 import { DBClient } from "./DBClient";
 import { Result } from "../errorHelper/resultType";
 
-interface Repository {
+export interface Repository {
     GetList(dbClient: DBClient): Promise<Result<question[], Error>>;
     Get(
         dbClient: DBClient,
@@ -9,7 +9,7 @@ interface Repository {
     ): Promise<Result<question, Error>>;
 }
 
-type question = {
+export type question = {
     ID: number;
     title: string;
     classID: number;
