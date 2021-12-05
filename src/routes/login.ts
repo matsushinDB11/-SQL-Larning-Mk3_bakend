@@ -35,7 +35,11 @@ const loginRouter = (s: Service): Router => {
      *                      description: Access token by jwt
      *                      schema:
      *                          type: string
-     *                          example: token=hogehoge;
+     *                          example: token=hogehoge
+     *                  token:
+     *                      description: フロント側でのユーザー情報取得用jwt
+     *                      schema:
+     *                          type: string
      */
     return router;
 };
