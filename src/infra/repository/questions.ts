@@ -55,3 +55,5 @@ class QuestionsInfra implements Repository {
         }
     };
 }
+
+export default QuestionsInfra;
