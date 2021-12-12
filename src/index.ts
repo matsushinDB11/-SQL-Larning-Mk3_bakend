@@ -21,7 +21,7 @@ app.get("/", (req: express.Request, res: express.Response) => {
 });
 
 // 3000ポートで受信
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 // APIサーバ起動
 app.listen(port);
