@@ -2,7 +2,6 @@ import { DBClient } from "../../domain/DBClient";
 import { question, Repository } from "../../domain/questions";
 import { Failure, Result, Success } from "../../errorHelper/resultType";
 import { GetInput } from "./input";
-import questions from "../../infra/repository/questions";
 
 const getList = async (
     dbClient: DBClient,
@@ -29,4 +28,4 @@ const get = async (
     }
 };
 
-// export
+export { getList, get };
