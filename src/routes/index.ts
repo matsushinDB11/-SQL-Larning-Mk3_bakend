@@ -12,6 +12,6 @@ export default function createRoutes(
     const router = express.Router();
     router.use("/users", usersRouter(s));
     router.use("/login", loginRouter(s));
-    router.use("questions", questionsRouter(s));
+    router.use("/questions", questionsRouter(s));
     return router;
 }
