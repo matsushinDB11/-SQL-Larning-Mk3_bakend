@@ -45,7 +45,8 @@
     "make_doc": "swagger-jsdoc -d swaggerDefinition.cjs ./src/routes/**.ts",
     "eslint": "eslint src/",
     "prettier": "prettier --write 'src/**/*.{js,ts,json}'",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "seedQuestions": "ts-node prisma/questionsSeed.ts"
   },
   "prisma": {
     "seed": "ts-node --require dotenv/config prisma/seed.ts"
