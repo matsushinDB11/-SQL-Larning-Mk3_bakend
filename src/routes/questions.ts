@@ -13,6 +13,9 @@ const questionsRouter = (s: Service): express.Router => {
      *      get:
      *          tags:
      */
+    router.get("/:id", (req: Request, res: Response) => {
+        s.questions.Get(req, res);
+    });
     return router;
 };
 
