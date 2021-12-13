@@ -29,8 +29,7 @@ model Token {
 model Class {
     id Int @id @default(autoincrement())
     title String
-    // TODO fix typo quetsions -> questions
-    quetsions Question[]
+    questions Question[]
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
