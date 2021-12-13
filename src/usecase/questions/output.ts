@@ -1,4 +1,4 @@
-import { question as questionDomain } from "../../domain/questions";
+import { question as questionDomain, sqliteFile } from "../../domain/questions";
 
 type question = {
     ID: number;
@@ -33,5 +33,17 @@ const convertListOutput = (input: questionDomain[]): ListOutput => {
     return output;
 };
 
+const convertGetOutput = (
+    questionData: questionDomain,
+    sqlite: sqliteFile
+): question => {
+    return {
+        ID: questionData.ID,
+        title: questionData.title,
+        classID: questionData.classID,
+        sqliteBase64: sqlite.base64,
+    };
+};
+
 export type { question, ListOutput };
-export { convertListOutput };
+export { convertListOutput, convertGetOutput };

@@ -1,7 +1,7 @@
 import { DBClient } from "../../domain/DBClient";
 import { question, Repository } from "../../domain/questions";
 import { Failure, Result, Success } from "../../errorHelper/resultType";
-import { GetInput } from "./input";
+import { GetInput, GetSqliteInput } from "./input";
 
 const getList = async (
     dbClient: DBClient,
@@ -28,4 +28,13 @@ const get = async (
     }
 };
 
-export { getList, get };
+const getSqlite = (questionsRepo: Repository, input: GetSqliteInput) => {
+    const data = questionsRepo.GetSqliteFile(input.fileName);
+    if (data.isFailure()) {
+        return new Failure(data.value);
+    } else {
+        return new Success(data.value);
+    }
+};
+
+export { getList, get, getSqlite };
