@@ -21,6 +21,7 @@ class QuestionsInfra implements Repository {
                     ID: data.id,
                     title: data.title,
                     classID: data.classId,
+                    sqliteFileName: data.sqliteFileName,
                 });
             });
             return new Success(resData);
@@ -47,6 +48,7 @@ class QuestionsInfra implements Repository {
                     ID: rowData.id,
                     title: rowData.title,
                     classID: rowData.classId,
+                    sqliteFileName: rowData.sqliteFileName,
                 };
                 return new Success(resData);
             }

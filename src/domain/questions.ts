@@ -13,4 +13,5 @@ export type question = {
     ID: number;
     title: string;
     classID: number;
+    sqliteFileName: string;
 };
