@@ -39,6 +39,7 @@ model Question {
     title String
     class Class @relation(fields: [classId], references: [id])
     classId Int
+    sqliteFileName String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
