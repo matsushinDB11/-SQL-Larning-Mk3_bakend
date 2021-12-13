@@ -8,10 +8,16 @@ const main = async () => {
     await prisma.class.create({
         data: {
             title: "第1回",
-            quetsions: {
+            questions: {
                 create: [
-                    { title: "employees テーブルの内容を全て取得せよ" },
-                    { title: "customers テーブルの内容を全て取得せよ" },
+                    {
+                        title: "employees テーブルの内容を全て取得せよ",
+                        sqliteFileName: "database1.sqlite3",
+                    },
+                    {
+                        title: "customers テーブルの内容を全て取得せよ",
+                        sqliteFileName: "database1.sqlite3",
+                    },
                 ],
             },
         },
