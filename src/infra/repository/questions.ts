@@ -1,4 +1,4 @@
-import { question, Repository } from "../../domain/questions";
+import { question, Repository, sqliteFile } from "../../domain/questions";
 import { Failure, Result, Success } from "../../errorHelper/resultType";
 import PrismaInfra from "./PrismaInfra";
 import { Question } from "@prisma/client";
@@ -6,6 +6,7 @@ import {
     DBInternalError,
     resourceNotFoundError,
 } from "../../errorHelper/errors";
+import * as fs from "fs";
 
 class QuestionsInfra implements Repository {
     GetList = async (
@@ -54,6 +55,19 @@ class QuestionsInfra implements Repository {
             }
         } catch (e) {
             return new Failure(new DBInternalError("Get question"));
+        }
+    };
+
+    GetSqliteFile = (fileName: string): Result<sqliteFile, Error> => {
+        const path = "../sqliteFiles/" + fileName;
+        try {
+            const buff = fs.readFileSync(path);
+            const res: sqliteFile = {
+                base64: buff.toString("base64"),
+            };
+            return new Success(res);
+        } catch (e) {
+            return new Failure(new resourceNotFoundError("fetch sqlite file"));
         }
     };
 }

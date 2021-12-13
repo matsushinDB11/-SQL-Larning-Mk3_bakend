@@ -7,6 +7,7 @@ export interface Repository {
         dbClient: DBClient,
         questionID: number
     ): Promise<Result<question, Error>>;
+    GetSqliteFile(fileName: string): Result<sqliteFile, Error>;
 }
 
 export type question = {
@@ -14,4 +15,8 @@ export type question = {
     title: string;
     classID: number;
     sqliteFileName: string;
+};
+
+export type sqliteFile = {
+    base64: string;
 };
