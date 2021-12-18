@@ -7,6 +7,7 @@ import {
     resourceNotFoundError,
 } from "../../errorHelper/errors";
 import * as fs from "fs";
+import * as path from "path";
 
 class QuestionsInfra implements Repository {
     GetList = async (
@@ -59,9 +60,13 @@ class QuestionsInfra implements Repository {
     };
 
     GetSqliteFile = (fileName: string): Result<sqliteFile, Error> => {
-        const path = "../sqliteFiles/" + fileName;
+        const sqliteFilePath = path.resolve(
+            __dirname,
+            "../sqliteFiles/",
+            fileName
+        );
         try {
-            const buff = fs.readFileSync(path);
+            const buff = fs.readFileSync(sqliteFilePath);
             const res: sqliteFile = {
                 base64: buff.toString("base64"),
             };
