@@ -33,7 +33,7 @@ const questionsRouter = (s: Service): express.Router => {
      * @swagger
      * /questions/:id:
      *  get:
-     *      tag: [Question]
+     *      tags: [Question]
      *      summary: 問題詳細取得
      *      description: Get question info
      *      responses:
