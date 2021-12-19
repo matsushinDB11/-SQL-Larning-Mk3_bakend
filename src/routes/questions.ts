@@ -36,6 +36,13 @@ const questionsRouter = (s: Service): express.Router => {
      *      tags: [Question]
      *      summary: 問題詳細取得
      *      description: Get question info
+     *      parameters:
+     *        - name: id
+     *          in: path
+     *          description: question id to fetch
+     *          required: ture
+     *          schema:
+     *              type: number
      *      responses:
      *          200:
      *              description: Success
