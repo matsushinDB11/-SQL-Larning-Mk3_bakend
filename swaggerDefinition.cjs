@@ -14,6 +14,10 @@ module.exports = {
         {
             name: 'Auth',
             description: '認証'
+        },
+        {
+            name: 'Question',
+            description: '問題'
         }
     ]
     ,

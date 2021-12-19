@@ -20,9 +20,12 @@ export default function usersRouter(s: Service): express.Router {
      *        description: Success
      *        content: application/json
      *        schema:
-     *          type: array
-     *          items:
-     *              $ref: "#/definitions/User"
+     *          type: object
+     *          properties:
+     *              users:
+     *                  type: array
+     *                  items:
+     *                      $ref: "#/definitions/User"
      */
 
     // Get 詳細取得

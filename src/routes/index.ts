@@ -15,3 +15,17 @@ export default function createRoutes(
     router.use("/questions", questionsRouter(s));
     return router;
 }
+
+/**
+ * @swagger
+ * definitions:
+ *  NotFoundError:
+ *      type: object
+ *      properties:
+ *          message:
+ *              type: string
+ *              description: Error request
+ *          name:
+ *              type: string
+ *              description: Error name
+ */
