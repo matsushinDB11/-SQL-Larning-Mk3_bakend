@@ -29,7 +29,7 @@ model Token {
 model Class {
     id Int @id @default(autoincrement())
     title String
-    quetsions Question[]
+    questions Question[]
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
@@ -39,6 +39,7 @@ model Question {
     title String
     class Class @relation(fields: [classId], references: [id])
     classId Int
+    sqliteFileName String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }

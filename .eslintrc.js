@@ -21,7 +21,8 @@ module.exports = {
     ],
     "ignorePatterns": [
         "**/.eslintrc.js",
-        "jest.config.js"
+        "jest.config.js",
+        "prisma/**"
     ],
     "rules": {
     }

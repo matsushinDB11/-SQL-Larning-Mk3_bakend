@@ -2,6 +2,7 @@ import express from "express";
 import usersRouter from "./users";
 import { Service } from "../di/di";
 import loginRouter from "./login";
+import questionsRouter from "./questions";
 
 // v1以下のルーティング
 export default function createRoutes(
@@ -11,5 +12,20 @@ export default function createRoutes(
     const router = express.Router();
     router.use("/users", usersRouter(s));
     router.use("/login", loginRouter(s));
+    router.use("/questions", questionsRouter(s));
     return router;
 }
+
+/**
+ * @swagger
+ * definitions:
+ *  NotFoundError:
+ *      type: object
+ *      properties:
+ *          message:
+ *              type: string
+ *              description: Error request
+ *          name:
+ *              type: string
+ *              description: Error name
+ */

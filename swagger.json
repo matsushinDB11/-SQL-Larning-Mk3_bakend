@@ -13,6 +13,10 @@
     {
       "name": "Auth",
       "description": "認証"
+    },
+    {
+      "name": "Question",
+      "description": "問題"
     }
   ],
   "apis": [
@@ -69,6 +73,67 @@
         }
       }
     },
+    "/questions": {
+      "get": {
+        "tags": [
+          "Question"
+        ],
+        "summary": "問題一覧取得",
+        "description": "Get questions list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": "application/json",
+            "schema": {
+              "$ref": "#/definitions/QuestionList"
+            }
+          },
+          "404": {
+            "description": "Not Found Error",
+            "content": "application/json",
+            "schema": {
+              "$ref": "#/definitions/NotFoundError"
+            }
+          }
+        }
+      }
+    },
+    "/questions/:id": {
+      "get": {
+        "tags": [
+          "Question"
+        ],
+        "summary": "問題詳細取得",
+        "description": "Get question info",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "question id to fetch",
+            "required": "ture",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": "application/json",
+            "schema": {
+              "$ref": "#/definitions/Question"
+            }
+          },
+          "404": {
+            "description": "Not Found Error",
+            "content": "application/json",
+            "schema": {
+              "$ref": "#/definitions/NotFoundError"
+            }
+          }
+        }
+      }
+    },
     "/users": {
       "get": {
         "tags": [
@@ -81,9 +146,14 @@
             "description": "Success",
             "content": "application/json",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
+              "type": "object",
+              "properties": {
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/User"
+                  }
+                }
               }
             }
           }
@@ -198,6 +268,59 @@
     }
   },
   "definitions": {
+    "NotFoundError": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error request"
+        },
+        "name": {
+          "type": "string",
+          "description": "Error name"
+        }
+      }
+    },
+    "Question": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "classID": {
+          "type": "integer"
+        },
+        "sqliteBase64": {
+          "type": "string",
+          "description": "base64 encoded sqliteFile"
+        }
+      }
+    },
+    "QuestionForList": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "QuestionList": {
+      "type": "object",
+      "properties": {
+        "questions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuestionForList"
+          }
+        }
+      }
+    },
     "User": {
       "type": "object",
       "properties": {

@@ -1,9 +1,11 @@
 import express from "express";
+import cors from "cors";
 import createRoutes from "./routes/index";
 import { NewService } from "./di/di";
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 const service = new NewService();
 
 app.use("/", createRoutes(app, service));
@@ -21,7 +23,7 @@ app.get("/", (req: express.Request, res: express.Response) => {
 });
 
 // 3000ポートで受信
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 // APIサーバ起動
 app.listen(port);
